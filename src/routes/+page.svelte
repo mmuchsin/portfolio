@@ -38,6 +38,29 @@
 		document.documentElement.lang = lang;
 		document.title = t.meta.title;
 	});
+
+	// ADR 0005: scroll reveals — one observer, class toggle, CSS does the motion.
+	// Elements without JS never get the hidden state (gated behind html.js in CSS).
+	$effect(() => {
+		const elements = Array.from(document.querySelectorAll<HTMLElement>('.reveal'));
+		if (!('IntersectionObserver' in window)) {
+			elements.forEach((el) => el.classList.add('is-visible'));
+			return;
+		}
+		const observer = new IntersectionObserver(
+			(entries) => {
+				for (const entry of entries) {
+					if (entry.isIntersecting) {
+						entry.target.classList.add('is-visible');
+						observer.unobserve(entry.target);
+					}
+				}
+			},
+			{ threshold: 0.15, rootMargin: '0px 0px -8% 0px' }
+		);
+		elements.forEach((el) => observer.observe(el));
+		return () => observer.disconnect();
+	});
 </script>
 
 <Header nav={t.nav} {lang} {setLang} />

@@ -23,10 +23,12 @@ export interface Dictionary {
 		alias: string;
 		tagline: string;
 		sub: string;
+		flip_hint: string;
 		cta_projects: string;
 		cta_contact: string;
 	};
 	about: {
+		eyebrow: string;
 		title: string;
 		body_1: string;
 		body_2: string;
@@ -34,6 +36,7 @@ export interface Dictionary {
 		highlights: string[];
 	};
 	projects: {
+		eyebrow: string;
 		title: string;
 		intro: string;
 		live: string;
@@ -41,6 +44,7 @@ export interface Dictionary {
 		items: Project[];
 	};
 	contact: {
+		eyebrow: string;
 		title: string;
 		intro: string;
 		github: string;
@@ -48,7 +52,7 @@ export interface Dictionary {
 		github_url: string;
 		linkedin_url: string;
 	};
-	footer: { text: string };
+	footer: { text: string; colophon: string };
 }
 
 /**

@@ -5,5 +5,8 @@
 </script>
 
 <footer class="site-footer">
-	<div class="wrap">{copy.text}</div>
+	<div class="wrap">
+		<p>{copy.text}</p>
+		<p class="colophon">{copy.colophon}</p>
+	</div>
 </footer>

@@ -11,12 +11,14 @@
 	"hero": {
 		"name": "M. Muchsin",
 		"alias": "Ucin",
-		"tagline": "Software engineer and researcher at the intersection of Islamic scholarship and modern technology.",
-		"sub": "From Pegon script transliteration to retrieval-augmented generation on HPC clusters — I build tools that make knowledge easier to access.",
+		"tagline": "I build language tools for Arabic-script languages — from Pegon transliteration to RAG research.",
+		"sub": "Classical Islamic scholarship meets modern systems: my work spans NLP, retrieval-augmented generation, and web engineering.",
+		"flip_hint": "click to switch script",
 		"cta_projects": "See my work",
 		"cta_contact": "Get in touch"
 	},
 	"about": {
+		"eyebrow": "Background",
 		"title": "About",
 		"body_1": "I grew up as a santri — an Islamic student — where classical Arabic grammar (nahwu) and the Pegon script were part of everyday study. That background shaped how I think about language: as structure, precision, and knowledge passed across generations.",
 		"body_2": "Today I am a software engineer and master's student at UNNES, working on retrieval-augmented generation (RAG) and building NLP tools for Arabic-script languages. My work spans web engineering, machine learning research, and community platforms.",
@@ -29,6 +31,7 @@
 		]
 	},
 	"projects": {
+		"eyebrow": "Selected work",
 		"title": "Projects",
 		"intro": "A selection of things I have built — from open-source language tools to client work.",
 		"live": "Live site",
@@ -61,6 +64,7 @@
 		]
 	},
 	"contact": {
+		"eyebrow": "Get in touch",
 		"title": "Contact",
 		"intro": "The fastest way to reach me is through GitHub or LinkedIn. I'm open to research collaborations, freelance work, and good conversations about language and code.",
 		"github": "GitHub",
@@ -69,6 +73,7 @@
 		"linkedin_url": "https://www.linkedin.com/in/mmuchsin"
 	},
 	"footer": {
-		"text": "© 2026 M. Muchsin (Ucin) · Built with SvelteKit"
+		"text": "© 2026 M. Muchsin (Ucin)",
+		"colophon": "Set in system type · Built with SvelteKit"
 	}
 }

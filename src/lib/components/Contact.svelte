@@ -6,14 +6,17 @@
 
 <section id="contact" class="section">
 	<div class="wrap">
-		<h2>{copy.title}</h2>
-		<p class="prose">{copy.intro}</p>
-		<div class="contact-links">
+		<div class="section-head reveal">
+			<p class="eyebrow">{copy.eyebrow}</p>
+			<h2>{copy.title}</h2>
+			<p class="prose">{copy.intro}</p>
+		</div>
+		<div class="contact-links reveal" style:--d="100ms">
 			<a class="btn btn-ghost" href={copy.github_url} target="_blank" rel="noopener noreferrer">
-				{copy.github} ↗
+				{copy.github} <span class="arrow">↗</span>
 			</a>
 			<a class="btn btn-ghost" href={copy.linkedin_url} target="_blank" rel="noopener noreferrer">
-				{copy.linkedin} ↗
+				{copy.linkedin} <span class="arrow">↗</span>
 			</a>
 		</div>
 	</div>

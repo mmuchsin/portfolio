@@ -18,7 +18,9 @@ Personal portfolio website for **M. Muchsin (Ucin)**, deployed on GitHub Pages.
 
 ## Current State
 
-**v1 implemented (2026-08-27):** single-page site built with SvelteKit + TypeScript (strict) + Svelte 5 runes; fully static via `@sveltejs/adapter-static`; EN/ID toggle persisted in localStorage; dark typographic theme (`#0d0d0d` / `#d4a843`). Deploys to GitHub Pages via GitHub Actions on push to `main`.
+**v1 implemented (2026-08-27):** single-page site built with SvelteKit + TypeScript (strict) + Svelte 5 runes; fully static via `@sveltejs/adapter-static`; EN/ID toggle persisted in localStorage; dark typographic theme (`#0d0d0d` / `d4a843`). Deploys to GitHub Pages via GitHub Actions on push to `main`.
+
+**v1.1 design pass (2026-08-27):** three-voice type system (serif display / sans body / mono utility), featured + list project layout, script-flip hero signature (`assalamu'alaikum` ↔ `السلام عليكم`), orchestrated motion per ADR 0005 (load stagger, scroll reveals, micro-interactions).
 
 - Repo: `mmuchsin/portfolio` (public)
 - Issue tracker: GitHub Issues with 5 canonical triage labels
@@ -57,6 +59,7 @@ Personal portfolio website for **M. Muchsin (Ucin)**, deployed on GitHub Pages.
 - ADR 0002: Single-page layout with 4 sections
 - ADR 0003: Bilingual i18n with EN/ID toggle
 - ADR 0004: Dark typographic design with warm accent
+- ADR 0005: Hand-rolled orchestrated motion (CSS keyframes + IntersectionObserver), no animation libraries — supersedes ADR 0004's "CSS transitions only" clause
 
 ## Open Questions
 

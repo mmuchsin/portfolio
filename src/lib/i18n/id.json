@@ -11,12 +11,14 @@
 	"hero": {
 		"name": "M. Muchsin",
 		"alias": "Ucin",
-		"tagline": "Software engineer dan peneliti di persimpangan keilmuan Islam dan teknologi modern.",
-		"sub": "Dari transliterasi aksara Pegon hingga retrieval-augmented generation di klaster HPC — saya membangun alat yang membuat ilmu lebih mudah diakses.",
+		"tagline": "Saya membangun alat bahasa untuk bahasa beraksara Arab — dari transliterasi Pegon hingga riset RAG.",
+		"sub": "Keilmuan Islam klasik bertemu sistem modern: karya saya mencakup NLP, retrieval-augmented generation, dan rekayasa web.",
+		"flip_hint": "klik untuk ganti aksara",
 		"cta_projects": "Lihat karya saya",
 		"cta_contact": "Hubungi saya"
 	},
 	"about": {
+		"eyebrow": "Latar belakang",
 		"title": "Tentang",
 		"body_1": "Saya tumbuh sebagai santri, di mana nahwu (tata bahasa Arab klasik) dan aksara Pegon adalah bagian dari keseharian. Latar itu membentuk cara saya memandang bahasa: sebagai struktur, ketelitian, dan ilmu yang diwariskan lintas generasi.",
 		"body_2": "Kini saya seorang software engineer dan mahasiswa S2 di UNNES yang bekerja pada retrieval-augmented generation (RAG) serta membangun alat NLP untuk bahasa beraksara Arab. Karya saya mencakup rekayasa web, riset machine learning, dan platform komunitas.",
@@ -29,6 +31,7 @@
 		]
 	},
 	"projects": {
+		"eyebrow": "Proyek terpilih",
 		"title": "Proyek",
 		"intro": "Beberapa hal yang pernah saya bangun — dari alat bahasa open-source hingga proyek klien.",
 		"live": "Aplikasi",
@@ -61,6 +64,7 @@
 		]
 	},
 	"contact": {
+		"eyebrow": "Hubungi saya",
 		"title": "Kontak",
 		"intro": "Cara tercepat menghubungi saya adalah lewat GitHub atau LinkedIn. Saya terbuka untuk kolaborasi riset, proyek freelance, dan percakapan tentang bahasa dan kode.",
 		"github": "GitHub",
@@ -69,6 +73,7 @@
 		"linkedin_url": "https://www.linkedin.com/in/mmuchsin"
 	},
 	"footer": {
-		"text": "© 2026 M. Muchsin (Ucin) · Dibuat dengan SvelteKit"
+		"text": "© 2026 M. Muchsin (Ucin)",
+		"colophon": "Diset dalam tipografi sistem · Dibuat dengan SvelteKit"
 	}
 }
