@@ -1,0 +1,74 @@
+{
+	"meta": {
+		"title": "M. Muchsin (Ucin) — Portofolio",
+		"description": "Portofolio M. Muchsin (Ucin) — software engineer di persimpangan keilmuan Islam dan teknologi modern: NLP, riset RAG, dan rekayasa web."
+	},
+	"nav": {
+		"about": "Tentang",
+		"projects": "Proyek",
+		"contact": "Kontak"
+	},
+	"hero": {
+		"name": "M. Muchsin",
+		"alias": "Ucin",
+		"tagline": "Software engineer dan peneliti di persimpangan keilmuan Islam dan teknologi modern.",
+		"sub": "Dari transliterasi aksara Pegon hingga retrieval-augmented generation di klaster HPC — saya membangun alat yang membuat ilmu lebih mudah diakses.",
+		"cta_projects": "Lihat karya saya",
+		"cta_contact": "Hubungi saya"
+	},
+	"about": {
+		"title": "Tentang",
+		"body_1": "Saya tumbuh sebagai santri, di mana nahwu (tata bahasa Arab klasik) dan aksara Pegon adalah bagian dari keseharian. Latar itu membentuk cara saya memandang bahasa: sebagai struktur, ketelitian, dan ilmu yang diwariskan lintas generasi.",
+		"body_2": "Kini saya seorang software engineer dan mahasiswa S2 di UNNES yang bekerja pada retrieval-augmented generation (RAG) serta membangun alat NLP untuk bahasa beraksara Arab. Karya saya mencakup rekayasa web, riset machine learning, dan platform komunitas.",
+		"highlights_title": "Bidang fokus",
+		"highlights": [
+			"NLP & transliterasi",
+			"Riset RAG / LLM",
+			"Rekayasa web",
+			"Humaniora Islam komputasional"
+		]
+	},
+	"projects": {
+		"title": "Proyek",
+		"intro": "Beberapa hal yang pernah saya bangun — dari alat bahasa open-source hingga proyek klien.",
+		"live": "Aplikasi",
+		"repo_label": "Kode sumber",
+		"items": [
+			{
+				"name": "Pegonku",
+				"description": "Mesin transliterasi aksara Pegon — tulisan Jawa beraksara Arab — yang mengonversi antara Pegon dan Latin dengan akurasi tinggi.",
+				"tags": ["Nuxt", "Python", "NLP", "Pegon"],
+				"live": "https://kitabku.netlify.app"
+			},
+			{
+				"name": "Pemuda Inklusi",
+				"description": "Platform komunitas untuk pengembangan pemuda yang inklusif — dibangun bersama, untuk komunitasnya.",
+				"tags": ["Vue", "Nuxt", "Komunitas"],
+				"live": "https://pemudainklusi.org"
+			},
+			{
+				"name": "Tokodifabel",
+				"description": "Toko daring untuk brand fashion, dari desain hingga peluncuran — WordPress/WooCommerce dengan interaksi berbasis GSAP.",
+				"tags": ["WordPress", "WooCommerce", "GSAP", "Freelance"],
+				"live": "https://tokodifabel.com"
+			},
+			{
+				"name": "TQA RAG Playground",
+				"description": "Playground riset untuk tesis S2 saya: pipeline RAG atas dataset thesis question answering, dilatih dan dievaluasi di klaster HPC UNNES.",
+				"tags": ["Python", "RAG", "HPC", "Riset tesis"],
+				"repo": "https://github.com/mmuchsin/tqa-rag"
+			}
+		]
+	},
+	"contact": {
+		"title": "Kontak",
+		"intro": "Cara tercepat menghubungi saya adalah lewat GitHub atau LinkedIn. Saya terbuka untuk kolaborasi riset, proyek freelance, dan percakapan tentang bahasa dan kode.",
+		"github": "GitHub",
+		"linkedin": "LinkedIn",
+		"github_url": "https://github.com/mmuchsin",
+		"linkedin_url": "https://www.linkedin.com/in/mmuchsin"
+	},
+	"footer": {
+		"text": "© 2026 M. Muchsin (Ucin) · Dibuat dengan SvelteKit"
+	}
+}

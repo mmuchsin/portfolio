@@ -18,13 +18,16 @@ Personal portfolio website for **M. Muchsin (Ucin)**, deployed on GitHub Pages.
 
 ## Current State
 
+**v1 implemented (2026-08-27):** single-page site built with SvelteKit + TypeScript (strict) + Svelte 5 runes; fully static via `@sveltejs/adapter-static`; EN/ID toggle persisted in localStorage; dark typographic theme (`#0d0d0d` / `#d4a843`). Deploys to GitHub Pages via GitHub Actions on push to `main`.
+
 - Repo: `mmuchsin/portfolio` (public)
 - Issue tracker: GitHub Issues with 5 canonical triage labels
 - Tech stack: SvelteKit + TypeScript (strict) + Svelte 5 runes + `@sveltejs/adapter-static`
-- Deploy: GitHub Pages via GitHub Actions (`base: '/portfolio'`)
+- Deploy: GitHub Pages via GitHub Actions (`kit.paths.base: '/portfolio'`)
 - Design: Clean dark theme, typographic, warm accent
 - Bilingual: EN/ID with language toggle
 - Structure: Single-page (Hero, About, Projects, Contact)
+- Pending: LinkedIn URL in `src/lib/i18n/*.json` is a placeholder (`linkedin.com/in/mmuchsin`) — verify the handle
 
 ## Projects to Showcase
 
