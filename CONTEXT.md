@@ -18,18 +18,20 @@ Personal portfolio website for **M. Muchsin (Ucin)**, deployed on GitHub Pages.
 
 ## Current State
 
-**v1 implemented (2026-08-27):** single-page site built with SvelteKit + TypeScript (strict) + Svelte 5 runes; fully static via `@sveltejs/adapter-static`; EN/ID toggle persisted in localStorage; dark typographic theme (`#0d0d0d` / `d4a843`). Deploys to GitHub Pages via GitHub Actions on push to `main`.
+**v1 implemented (2026-08-27):** single-page site built with SvelteKit + TypeScript (strict) + Svelte 5 runes; fully static via `@sveltejs/adapter-static`; EN/ID toggle persisted in localStorage. Deploys to GitHub Pages via GitHub Actions on push to `main`.
 
 **v1.1 design pass (2026-08-27):** three-voice type system (serif display / sans body / mono utility), featured + list project layout, script-flip hero signature (`assalamu'alaikum` ↔ `السلام عليكم`), orchestrated motion per ADR 0005 (load stagger, scroll reveals, micro-interactions).
+
+**v1.2 light editorial redesign (2026-08-28):** three-phase rollout — (14) palette swap to light theme (`--bg: #f8f9fa`, `--surface: #ffffff`, `--accent: #c49a3a` gold), (15) typography scale refinements (clamp-based hero name, lighter heading weight, tighter container), (16) motion refinements (scaled component animations, increased translate distances, polished layout). ADR 0004 (dark typographic design) fully superseded.
 
 - Repo: `mmuchsin/portfolio` (public)
 - Issue tracker: GitHub Issues with 5 canonical triage labels
 - Tech stack: SvelteKit + TypeScript (strict) + Svelte 5 runes + `@sveltejs/adapter-static`
 - Deploy: GitHub Pages via GitHub Actions (`kit.paths.base: '/portfolio'`)
-- Design: Clean dark theme, typographic, warm accent
-- Bilingual: EN/ID with language toggle
-- Structure: Single-page (Hero, About, Projects, Contact)
-- Pending: LinkedIn URL in `src/lib/i18n/*.json` is a placeholder (`linkedin.com/in/mmuchsin`) — verify the handle
+- Design: Light editorial theme, three-voice typography (serif / sans / mono), warm gold accent
+- Bilingual: EN/ID with language toggle persisted in localStorage
+- Structure: Single-page (Header, Hero, About, Projects, Contact, Footer)
+- All copy flows through typed i18n dictionary (`src/lib/i18n/*.json`) — zero hardcoded text in components
 
 ## Projects to Showcase
 
@@ -57,8 +59,8 @@ Personal portfolio website for **M. Muchsin (Ucin)**, deployed on GitHub Pages.
 
 - ADR 0001: SvelteKit + adapter-static for GitHub Pages
 - ADR 0002: Single-page layout with 4 sections
-- ADR 0003: Bilingual i18n with EN/ID toggle
-- ADR 0004: Dark typographic design with warm accent
+- ADR 0003: Bilingual i18n with EN/ID toggle, localStorage persistence
+- ADR 0004: ~~Dark typographic design~~ — superseded by v1.2 light editorial redesign (2026-08-28)
 - ADR 0005: Hand-rolled orchestrated motion (CSS keyframes + IntersectionObserver), no animation libraries — supersedes ADR 0004's "CSS transitions only" clause
 
 ## Open Questions
