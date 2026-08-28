@@ -11,7 +11,14 @@
 
 	// ADR 0003: locale lives in localStorage, never in the URL. The static
 	// HTML is always EN; a stored choice is applied on hydration.
-	let lang = $state<Locale>('en');
+	let initial: Locale = 'en';
+	try {
+		const stored = localStorage.getItem(STORAGE_KEY);
+		if (stored === 'en' || stored === 'id') initial = stored;
+	} catch {
+		// Storage unavailable — default to EN.
+	}
+	let lang = $state<Locale>(initial);
 	const t = $derived(translations[lang]);
 
 	function setLang(next: Locale) {
@@ -23,16 +30,6 @@
 			// works for this visit, it just won't persist.
 		}
 	}
-
-	$effect(() => {
-		let stored: string | null = null;
-		try {
-			stored = localStorage.getItem(STORAGE_KEY);
-		} catch {
-			stored = null;
-		}
-		if (stored === 'en' || stored === 'id') lang = stored;
-	});
 
 	$effect(() => {
 		document.documentElement.lang = lang;
