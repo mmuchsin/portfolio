@@ -68,3 +68,16 @@ Personal portfolio website for **Muchsin**, deployed on GitHub Pages.
 - Custom domain (future)
 - Blog section (future)
 - CV/Resume page (future)
+## Blog Feature (planned)
+
+**Status:** Design approved, implementation pending.
+
+- **Content format**: MDX (`.mdx`) with local files in `src/content/blog/`
+- **Organization**: Categories + tags as frontmatter metadata (flat routes, no URL impact)
+- **Routing**: `/blog` (list), `/blog/slug` (post), `/blog/tags/tag-name` (tag filter)
+- **Frontmatter**: `title`, `date`, `tags`, `description`
+- **MDX components**: Syntax-highlighted code blocks + callout boxes (note/warning/tip/info)
+- **Images**: Local assets folder alongside each post file
+- **Extras**: Auto-calculated reading time, no pagination for now
+- **Build**: Build-time rendering via SvelteKit data loading
+- **ADR**: 0006 (MDX choice), 0007 (categories + tags)

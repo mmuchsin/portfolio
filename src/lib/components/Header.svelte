@@ -15,6 +15,11 @@
 	function closeMenu() {
 		menuOpen = false;
 	}
+
+	function isSectionActive(sectionId: string): boolean {
+		if (sectionId === 'blog') return activeSection === 'blog';
+		return activeSection === sectionId;
+	}
 </script>
 
 <header class="site-header">
@@ -22,14 +27,25 @@
 		<a class="brand" href={`${base}/`}>Muchsin</a>
 		<nav class="site-nav" aria-label="Sections">
 			{#each Object.entries(nav) as [key, label]}
-				{@const sectionId = key === 'about' ? 'about' : key === 'projects' ? 'projects' : 'contact'}
-				<a
-					href={`#${sectionId}`}
-					class:active={activeSection === sectionId}
-					aria-current={activeSection === sectionId ? 'page' : undefined}
-					onclick={closeMenu}>
-					{label}
-				</a>
+				{#if key === 'blog'}
+					<!-- External page link -->
+					<a
+						href={`${base}/blog`}
+						class:active={isSectionActive('blog')}
+						aria-current={isSectionActive('blog') ? 'page' : undefined}
+						onclick={closeMenu}>
+						{label}
+					</a>
+				{:else}
+					{@const sectionId = key === 'about' ? 'about' : key === 'projects' ? 'projects' : 'contact'}
+					<a
+						href={`#${sectionId}`}
+						class:active={isSectionActive(sectionId)}
+						aria-current={isSectionActive(sectionId) ? 'page' : undefined}
+						onclick={closeMenu}>
+						{label}
+					</a>
+				{/if}
 			{/each}
 		</nav>
 		<LanguageToggle {lang} {setLang} />
@@ -39,22 +55,28 @@
 			aria-label={menuOpen ? 'Close menu' : 'Open menu'}
 			aria-expanded={menuOpen}
 			onclick={() => (menuOpen = !menuOpen)}>
-			<span class="bar bar-top" />
-			<span class="bar bar-mid" />
-			<span class="bar bar-bot" />
+			<span class="bar bar-top"></span>
+			<span class="bar bar-mid"></span>
+			<span class="bar bar-bot"></span>
 		</button>
 	</div>
 
 	{#if menuOpen}
 		<nav class="mobile-nav" aria-label="Sections mobile">
 			{#each Object.entries(nav) as [key, label]}
-				{@const sectionId = key === 'about' ? 'about' : key === 'projects' ? 'projects' : 'contact'}
-				<a
-					href={`#${sectionId}`}
-					class:active={activeSection === sectionId}
-					onclick={closeMenu}>
-					{label}
-				</a>
+				{#if key === 'blog'}
+					<a href={`${base}/blog`} onclick={closeMenu}>
+						{label}
+					</a>
+				{:else}
+					{@const sectionId = key === 'about' ? 'about' : key === 'projects' ? 'projects' : 'contact'}
+					<a
+						href={`#${sectionId}`}
+						class:active={isSectionActive(sectionId)}
+						onclick={closeMenu}>
+						{label}
+					</a>
+				{/if}
 			{/each}
 		</nav>
 	{/if}
