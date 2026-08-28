@@ -8,6 +8,7 @@ Examples:
 - `bun install` instead of `npm install`
 - `bun add <package>` instead of `npm install <package>`
 - `bun remove <package>` instead of `npm uninstall <package>`
+- `bunx instead` of `npx`
 - `bun run dev`, `bun run build`, `bun run check`, `bun run test`
 
 This applies to all shell commands, scripts, and agent actions.

@@ -5,6 +5,8 @@ import remarkRehype from 'remark-rehype';
 import rehypeHighlight from 'rehype-highlight';
 import rehypeStringify from 'rehype-stringify';
 import remarkCallout from 'remark-callout';
+import fs from 'node:fs';
+import path from 'node:path';
 import type { BlogPost, BlogPostFrontmatter } from './types.js';
 import { calculateReadingTime } from './types.js';
 
@@ -144,19 +146,17 @@ export function extractFrontmatter(mdxContent: string): { frontmatter: BlogPostF
 
 export async function loadBlogPost(
 	dirPath: string,
-	filename: string
+	filename: string,
+	slug: string
 ): Promise<BlogPost | null> {
 	let content: string;
 	try {
-		const fs = await import('node:fs');
-		const path = await import('node:path');
 		content = fs.readFileSync(path.join(dirPath, filename), 'utf-8');
 	} catch {
 		return null;
 	}
 
 	const { frontmatter, content: body } = extractFrontmatter(content);
-	const slug = dirPath.split('/').pop() ?? '';
 
 	return {
 		...frontmatter,
@@ -169,9 +169,6 @@ export async function loadBlogPost(
 export async function loadAllBlogPosts(
 	dirPath: string
 ): Promise<BlogPost[]> {
-	const fs = await import('node:fs');
-	const path = await import('node:path');
-
 	const posts: BlogPost[] = [];
 
 	try {
@@ -183,7 +180,7 @@ export async function loadAllBlogPosts(
 				const indexFile = path.join(postPath, 'index.mdx');
 
 				if (fs.existsSync(indexFile)) {
-					const post = await loadBlogPost(dirPath, `${entry.name}/index.mdx`);
+					const post = await loadBlogPost(dirPath, `${entry.name}/index.mdx`, entry.name);
 					if (post) posts.push(post);
 				}
 			}
