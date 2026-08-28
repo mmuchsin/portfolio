@@ -572,7 +572,7 @@ main > section + section {
 	grid-template-columns: minmax(11rem, 1fr) minmax(0, 1.7fr) auto;
 	gap: var(--space-6);
 	align-items: start;
-	padding-block: var(--space-6);
+	padding: var(--space-6) var(--space-8);
 	border-top: 1px solid var(--border);
 	transition: background-color var(--motion-normal);
 }
