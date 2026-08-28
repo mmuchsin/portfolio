@@ -1,7 +1,7 @@
 {
 	"meta": {
-		"title": "M. Muchsin (Ucin) — Portofolio",
-		"description": "Portofolio M. Muchsin (Ucin) — software engineer di persimpangan keilmuan Islam dan teknologi modern: NLP, riset RAG, dan rekayasa web."
+		"title": "Muchsin — Portofolio",
+		"description": "Portofolio Muchsin — software engineer yang fokus pada NLP, riset RAG, dan rekayasa web."
 	},
 	"nav": {
 		"about": "Tentang",
@@ -9,7 +9,7 @@
 		"contact": "Kontak"
 	},
 	"hero": {
-		"name": "M. Muchsin",
+		"name": "Muchsin",
 		"alias": "Ucin",
 		"tagline": "Saya membangun alat bahasa untuk bahasa beraksara Arab — dari transliterasi Pegon hingga riset RAG.",
 		"sub": "Keilmuan Islam klasik bertemu sistem modern: karya saya mencakup NLP, retrieval-augmented generation, dan rekayasa web.",
@@ -73,7 +73,7 @@
 		"linkedin_url": "https://www.linkedin.com/in/mmuchsin"
 	},
 	"footer": {
-		"text": "© 2026 M. Muchsin (Ucin)",
+		"text": "© 2026 Muchsin",
 		"colophon": "Diset dalam tipografi sistem · Dibuat dengan SvelteKit"
 	}
 }

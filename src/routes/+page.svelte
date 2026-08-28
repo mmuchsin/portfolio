@@ -64,13 +64,13 @@
 </script>
 
 <svelte:head>
-	<title>M. Muchsin — Software Engineer</title>
+	<title>Muchsin — Software Engineer</title>
 
 	<!-- Open Graph -->
-	<meta property="og:title" content="M. Muchsin — Software Engineer" />
+	<meta property="og:title" content="Muchsin — Software Engineer" />
 	<meta
 		property="og:description"
-		content="Portfolio of M. Muchsin (Ucin) — software engineer specializing in NLP, RAG research, and web engineering."
+		content="Portfolio of Muchsin — software engineer specializing in NLP, RAG research, and web engineering."
 	/>
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://mmuchsin.github.io/portfolio/" />
@@ -81,7 +81,7 @@
 		{
 			"@context": "https://schema.org",
 			"@type": "Person",
-			"name": "M. Muchsin",
+			"name": "Muchsin",
 			"url": "https://mmuchsin.github.io/portfolio/",
 			"sameAs": [
 				"https://github.com/mmuchsin",

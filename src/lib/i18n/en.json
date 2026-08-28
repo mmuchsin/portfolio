@@ -1,7 +1,7 @@
 {
 	"meta": {
-		"title": "M. Muchsin (Ucin) — Portfolio",
-		"description": "Portfolio of M. Muchsin (Ucin) — software engineer at the intersection of Islamic scholarship and modern technology: NLP, RAG research, and web engineering."
+		"title": "Muchsin — Portfolio",
+		"description": "Portfolio of Muchsin — software engineer specializing in NLP, RAG research, and web engineering."
 	},
 	"nav": {
 		"about": "About",
@@ -9,7 +9,7 @@
 		"contact": "Contact"
 	},
 	"hero": {
-		"name": "M. Muchsin",
+		"name": "Muchsin",
 		"alias": "Ucin",
 		"tagline": "I build language tools for Arabic-script languages — from Pegon transliteration to RAG research.",
 		"sub": "Classical Islamic scholarship meets modern systems: my work spans NLP, retrieval-augmented generation, and web engineering.",
@@ -73,7 +73,7 @@
 		"linkedin_url": "https://www.linkedin.com/in/mmuchsin"
 	},
 	"footer": {
-		"text": "© 2026 M. Muchsin (Ucin)",
+		"text": "© 2026 Muchsin",
 		"colophon": "Set in system type · Built with SvelteKit"
 	}
 }

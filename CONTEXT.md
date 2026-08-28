@@ -1,13 +1,13 @@
 # CONTEXT.md — Portfolio Project
 
 ## Project
-Personal portfolio website for **M. Muchsin (Ucin)**, deployed on GitHub Pages.
+Personal portfolio website for **Muchsin**, deployed on GitHub Pages.
 
 ## Glossary
 
 | Term | Definition |
 |------|------------|
-| **Ucin** | Preferred name for M. Muchsin; used in bio, hero, contact |
+| **Ucin** | Nickname / alias; rarely used externally — display name is just "Muchsin" |
 | **Santri** | Islamic student/scholar background; expertise in classical Arabic grammar (*nahwu*) and Pegon script |
 | **Pegon** | Javanese script for writing Arabic-script languages; core of Pegonku project |
 | **Nahwu** | Classical Arabic grammar; part of Ucin's scholarly background |
