@@ -63,6 +63,34 @@
 	});
 </script>
 
+<svelte:head>
+	<title>M. Muchsin — Software Engineer</title>
+
+	<!-- Open Graph -->
+	<meta property="og:title" content="M. Muchsin — Software Engineer" />
+	<meta
+		property="og:description"
+		content="Portfolio of M. Muchsin (Ucin) — software engineer specializing in NLP, RAG research, and web engineering."
+	/>
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="https://mmuchsin.github.io/portfolio/" />
+	<meta property="og:image" content="https://mmuchsin.github.io/portfolio/og-image.png" />
+
+	<!-- JSON-LD: Person schema -->
+	<script type="application/ld+json">
+		{
+			"@context": "https://schema.org",
+			"@type": "Person",
+			"name": "M. Muchsin",
+			"url": "https://mmuchsin.github.io/portfolio/",
+			"sameAs": [
+				"https://github.com/mmuchsin",
+				"https://www.linkedin.com/in/mmuchsin"
+			]
+		}
+	</script>
+</svelte:head>
+
 <Header nav={t.nav} {lang} {setLang} />
 
 <main>
