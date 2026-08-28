@@ -24,6 +24,12 @@
  *   --measure           optimal reading width (60ch)
  *   --section-block     vertical space between sections (fluid via clamp)
  *
+ * Corner Radius Tokens (visual consistency across surfaces):
+ *   --radius-xs:       2px    focus ring, tight accents
+ *   --radius-sm:       4px    tags, inline badges
+ *   --radius-md:       8px    cards, elevated surfaces
+ *   --radius-full:     999px  pills, buttons, toggle segments
+ *
  * Spacing Scale (uniform increments, multiples of 4px / 0.25rem):
  *   --space-1: 0.25rem   (4px)    micro — inline gaps
  *   --space-2: 0.5rem    (8px)    small — tight padding
@@ -51,7 +57,6 @@
  *
  * Elevation Tokens (shadow layers):
  *   --shadow-sm:         subtle card shadow
- *   --shadow-md:         elevated card shadow
  *
  * Breakpoints:
  *   36em  (576px) — nav collapse, mobile-only view
@@ -90,6 +95,12 @@
 	--gutter: clamp(1.25rem, 4vw, 2rem);
 	--measure: 60ch;
 	--section-block: clamp(5.5rem, 13vh, 9rem);
+
+	/* Corner radius — unified visual language */
+	--radius-xs: 2px;
+	--radius-sm: 4px;
+	--radius-md: 8px;
+	--radius-full: 999px;
 
 	/* Spacing scale — multiples of 4px (0.25rem) */
 	--space-1: 0.25rem;
@@ -152,7 +163,7 @@ body {
 :focus-visible {
 	outline: 2px solid var(--accent);
 	outline-offset: var(--space-1);
-	border-radius: 2px;
+	border-radius: var(--radius-xs);
 	/* Secondary indicator for visibility on white card surfaces (gold outline has ~1.6:1 contrast on #fff) */
 	box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 30%, transparent);
 }
@@ -172,7 +183,7 @@ a {
 	color: var(--accent-ink);
 	font-weight: 600;
 	text-decoration: none;
-	border-radius: 0 0 4px 4px;
+	border-radius: 0 0 var(--radius-sm) var(--radius-sm);
 	transition: top var(--motion-fast) var(--motion-ease);
 }
 
@@ -252,7 +263,7 @@ a {
 .lang-toggle {
 	display: inline-flex;
 	border: 1px solid var(--border);
-	border-radius: 999px;
+	border-radius: var(--radius-full);
 	overflow: hidden;
 }
 
@@ -359,7 +370,7 @@ a {
 .flip > span {
 	grid-area: 1 / 1;
 	white-space: nowrap;
-	transition: opacity var(--motion-entrance) var(--motion-ease),
+	transition: opacity var(--motion-entrance) var(--ease-reveal),
 		transform var(--motion-entrance) var(--ease-reveal);
 }
 
@@ -405,7 +416,7 @@ a {
 .btn {
 	display: inline-block;
 	padding: var(--space-3) var(--space-5);
-	border-radius: 999px;
+	border-radius: var(--radius-full);
 	font-weight: 500;
 	text-decoration: none;
 	transition: background-color var(--motion-normal), border-color var(--motion-normal),
@@ -422,7 +433,9 @@ a {
 }
 
 .btn-primary:hover {
-	background-color: color-mix(in srgb, var(--accent) 86%, white);
+	/* Darken toward black for perceptible contrast change (was 86% white → nearly identical) */
+	background-color: color-mix(in srgb, var(--accent) 75%, black);
+	box-shadow: 0 2px 8px color-mix(in srgb, var(--accent) 35%, transparent);
 }
 
 .btn-ghost {
@@ -514,7 +527,7 @@ main > section + section {
 
 .chips li {
 	border: 1px solid var(--border);
-	border-radius: 999px;
+	border-radius: var(--radius-full);
 	padding: var(--space-2) var(--space-5);
 	font-family: var(--font-mono);
 	font-size: 0.78rem;
@@ -532,15 +545,16 @@ main > section + section {
 .project-card.featured {
 	background-color: var(--surface);
 	border: 1px solid var(--border);
-	border-radius: 10px;
+	border-radius: var(--radius-md);
 	padding: clamp(1.5rem, 3vw, 2.25rem);
 	margin-bottom: var(--space-2);
-	transition: border-color var(--motion-normal);
+	transition: border-color var(--motion-normal), box-shadow var(--motion-normal);
 	box-shadow: var(--shadow-sm);
 }
 
 .project-card.featured:hover {
 	border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
+	box-shadow: 0 2px 12px color-mix(in srgb, var(--color-text) 6%, transparent);
 }
 
 .project-head {
@@ -584,7 +598,8 @@ main > section + section {
 }
 
 .project-row:hover {
-	background-color: color-mix(in srgb, var(--accent) 5%, var(--bg));
+	/* Increased from 5% to 12% for perceptible hover feedback */
+	background-color: color-mix(in srgb, var(--accent) 12%, var(--bg));
 }
 
 .project-title {
@@ -620,7 +635,7 @@ main > section + section {
 
 .tags li {
 	background-color: color-mix(in srgb, var(--text) 6%, transparent);
-	border-radius: 4px;
+	border-radius: var(--radius-sm);
 	padding: var(--space-1) var(--space-3);
 	font-family: var(--font-mono);
 	font-size: 0.68rem;
@@ -725,7 +740,7 @@ a:hover .arrow {
 
 	.hero .name-rule {
 		transform-origin: left;
-		animation: rule-draw 0.8s var(--ease-reveal) both;
+		animation: rule-draw var(--motion-duration) var(--ease-reveal) both;
 		animation-delay: var(--motion-delay-rule);
 	}
 }
@@ -735,7 +750,7 @@ a:hover .arrow {
 html.js .reveal {
 	opacity: 0;
 	transform: translateY(var(--motion-translate-reveal)) scale(0.995);
-	transition: opacity var(--motion-duration) var(--motion-ease),
+	transition: opacity var(--motion-duration) var(--ease-reveal),
 		transform var(--motion-duration) var(--ease-reveal);
 	transition-delay: var(--d, 0ms);
 }
