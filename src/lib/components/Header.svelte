@@ -12,7 +12,7 @@
 
 <header class="site-header">
 	<div class="wrap">
-		<a class="brand" href={`${base}/`}>Ucin</a>
+		<a class="brand" href={`${base}/`}>Muchsin</a>
 		<nav class="site-nav" aria-label="Sections">
 			<a href="#about">{nav.about}</a>
 			<a href="#projects">{nav.projects}</a>

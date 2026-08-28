@@ -40,7 +40,7 @@
 				"name": "Pegonku",
 				"description": "Transliteration engine for the Pegon script — Javanese written in Arabic script — converting between Pegon and Latin with high fidelity.",
 				"tags": ["Nuxt", "Python", "NLP", "Pegon"],
-				"live": "https://kitabku.netlify.app"
+				"live": "https://pegonku.netlify.app"
 			},
 			{
 				"name": "Pemuda Inklusi",

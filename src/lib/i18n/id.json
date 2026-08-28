@@ -40,7 +40,7 @@
 				"name": "Pegonku",
 				"description": "Mesin transliterasi aksara Pegon — tulisan Jawa beraksara Arab — yang mengonversi antara Pegon dan Latin dengan akurasi tinggi.",
 				"tags": ["Nuxt", "Python", "NLP", "Pegon"],
-				"live": "https://kitabku.netlify.app"
+				"live": "https://pegonku.netlify.app"
 			},
 			{
 				"name": "Pemuda Inklusi",
