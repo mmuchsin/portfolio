@@ -1,33 +1,127 @@
 /* ---------------------------------------------------------------------------
-   Design tokens — light editorial theme (ADR 0004 superseded by v2 redesign),
-   motion per ADR 0005
+   Design Tokens — Light Editorial Theme (ADR 0004 superseded by v1.2 redesign)
+   Motion per ADR 0005
 
    Three type voices, each encoding something true about the subject:
    serif display = the classical text · sans body = engineering prose
    mono utility  = the tools (labels, meta, tags)
 --------------------------------------------------------------------------- */
-:root {
-	--bg: #f8f9fa;
-	--surface: #ffffff;
-	--border: #e2e5e8;
-	--text: #1a1d21;
-	--muted: #6b7280;
-	--accent: #c49a3a;
-	--accent-ink: #faf9f6;
 
+/* Token Catalog — single source of truth for all design decisions
+ *
+ * Semantic Tokens (what things are):
+ *   --color-bg          page background
+ *   --color-surface     card/elevated surface
+ *   --color-border      divider lines
+ *   --color-text        primary body text
+ *   --color-muted       secondary/decorative text
+ *   --color-accent      brand accent (gold)
+ *   --color-accent-ink  text on accent background
+ *
+ * Layout Tokens (where things go):
+ *   --container         max-width of content (52rem / 832px)
+ *   --gutter            horizontal padding (fluid via clamp)
+ *   --measure           optimal reading width (60ch)
+ *   --section-block     vertical space between sections (fluid via clamp)
+ *
+ * Spacing Scale (uniform increments, multiples of 4px / 0.25rem):
+ *   --space-1: 0.25rem   (4px)    micro — inline gaps
+ *   --space-2: 0.5rem    (8px)    small — tight padding
+ *   --space-3: 0.75rem   (12px)   medium — comfortable padding
+ *   --space-4: 1rem      (16px)   base unit
+ *   --space-5: 1.25rem   (20px)   component gaps
+ *   --space-6: 1.5rem    (24px)   section internal
+ *   --space-7: 1.75rem   (28px)   headline spacing
+ *   --space-8: 2rem      (32px)   card padding, footer
+ *   --space-10: 2.5rem   (40px)   subheading margin
+ *   --space-11: 2.75rem  (44px)   section-head gap
+ *   --space-12: 3rem     (48px)   large gaps
+ *
+ * Motion Tokens (timing & easing):
+ *   --motion-fast:       100ms    press / micro-feedback
+ *   --motion-normal:     150ms    hover transitions
+ *   --motion-slow:       250ms    nav underline draw, arrow move
+ *   --motion-entrance:   300ms    script-flip crossfade
+ *   --motion-duration:   700ms    scroll reveal, hero rise-in
+ *   --motion-stagger:    80ms     per-element stagger delay
+ *   --motion-delay-hero: 60ms     first element hero load
+ *   --motion-delay-rule: 550ms    name rule draw delay
+ *   --motion-ease:       ease     generic easing
+ *   --ease-reveal:       cubic-bezier(0.22, 1, 0.36, 1)  smooth overshoot
+ *
+ * Elevation Tokens (shadow layers):
+ *   --shadow-sm:         subtle card shadow
+ *   --shadow-md:         elevated card shadow
+ *
+ * Breakpoints:
+ *   36em  (576px) — nav collapse, mobile-only view
+ *   48em  (768px) — project grid reflow, tablet breakpoint
+ *   No max-width above 48em — fluid layout for desktop+
+ */
+
+:root {
+	/* Semantic color tokens */
+	--color-bg: #f8f9fa;
+	--color-surface: #ffffff;
+	--color-border: #e2e5e8;
+	--color-text: #1a1d21;
+	--color-muted: #6b7280;
+	--color-accent: #c49a3a;
+	--color-accent-ink: #faf9f6;
+
+	/* Backwards-compat aliases (map to semantic names) */
+	--bg: var(--color-bg);
+	--surface: var(--color-surface);
+	--border: var(--color-border);
+	--text: var(--color-text);
+	--muted: var(--color-muted);
+	--accent: var(--color-accent);
+	--accent-ink: var(--color-accent-ink);
+
+	/* Typography */
 	--font-sans: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto,
 		'Helvetica Neue', Arial, sans-serif;
 	--font-serif: ui-serif, Georgia, Cambria, 'Times New Roman', serif;
 	--font-mono: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas,
 		'Liberation Mono', monospace;
 
+	/* Layout tokens */
 	--container: 52rem;
 	--gutter: clamp(1.25rem, 4vw, 2rem);
 	--measure: 60ch;
 	--section-block: clamp(5.5rem, 13vh, 9rem);
 
-	--transition-fast: 150ms ease;
+	/* Spacing scale — multiples of 4px (0.25rem) */
+	--space-1: 0.25rem;
+	--space-2: 0.5rem;
+	--space-3: 0.75rem;
+	--space-4: 1rem;
+	--space-5: 1.25rem;
+	--space-6: 1.5rem;
+	--space-7: 1.75rem;
+	--space-8: 2rem;
+	--space-9: 2.25rem;
+	--space-10: 2.5rem;
+	--space-11: 2.75rem;
+	--space-12: 3rem;
+
+	/* Motion tokens */
+	--motion-fast: 100ms;
+	--motion-normal: 150ms;
+	--motion-slow: 250ms;
+	--motion-entrance: 300ms;
+	--motion-duration: 700ms;
+	--motion-stagger: 80ms;
+	--motion-delay-hero: 60ms;
+	--motion-delay-rule: 550ms;
+	--motion-translate-hero: 18px;
+	--motion-translate-reveal: 28px;
+	--motion-ease: ease;
 	--ease-reveal: cubic-bezier(0.22, 1, 0.36, 1);
+
+	/* Elevation tokens */
+	--shadow-sm: 0 1px 3px color-mix(in srgb, var(--color-text) 4%, transparent),
+		0 4px 12px color-mix(in srgb, var(--color-text) 3%, transparent);
 }
 
 *,
@@ -57,7 +151,7 @@ body {
 
 :focus-visible {
 	outline: 2px solid var(--accent);
-	outline-offset: 3px;
+	outline-offset: var(--space-1);
 	border-radius: 2px;
 }
 
@@ -107,7 +201,7 @@ a {
 	color: var(--muted);
 	font-size: 0.95rem;
 	text-decoration: none;
-	transition: color var(--transition-fast);
+	transition: color var(--motion-normal);
 }
 
 .site-nav a::after {
@@ -115,12 +209,12 @@ a {
 	position: absolute;
 	left: 0;
 	right: 0;
-	bottom: -5px;
+	bottom: -3px;
 	height: 1.5px;
 	background-color: var(--accent);
 	transform: scaleX(0);
 	transform-origin: left;
-	transition: transform 250ms var(--ease-reveal);
+	transition: transform var(--motion-slow) var(--ease-reveal);
 }
 
 .site-nav a:hover {
@@ -143,14 +237,14 @@ a {
 	appearance: none;
 	background: transparent;
 	border: 0;
-	padding: 0.35rem 0.8rem;
+	padding: var(--space-2) var(--space-3);
 	font: inherit;
 	font-size: 0.8rem;
 	font-weight: 600;
 	letter-spacing: 0.06em;
 	color: var(--muted);
 	cursor: pointer;
-	transition: color var(--transition-fast), background-color var(--transition-fast);
+	transition: color var(--motion-normal), background-color var(--motion-normal);
 }
 
 .lang-toggle button.active {
@@ -196,21 +290,21 @@ a {
 
 .name-rule {
 	display: block;
-	width: 4.5rem;
+	width: var(--space-12);
 	height: 2px;
-	margin-top: 1.5rem;
+	margin-top: var(--space-6);
 	background-color: var(--accent);
 }
 
 .hero .tagline {
-	margin: 1.75rem 0 0;
+	margin: var(--space-7) 0 0;
 	max-width: 46ch;
 	font-size: clamp(1.1rem, 2vw, 1.3rem);
 	line-height: 1.5;
 }
 
 .hero .sub {
-	margin: 1rem 0 0;
+	margin: var(--space-4) 0 0;
 	max-width: 58ch;
 	color: var(--muted);
 }
@@ -220,8 +314,8 @@ a {
 	display: inline-flex;
 	flex-direction: column;
 	align-items: flex-start;
-	gap: 0.45rem;
-	margin-top: 2.25rem;
+	gap: var(--space-2);
+	margin-top: var(--space-9);
 }
 
 .flip {
@@ -238,7 +332,8 @@ a {
 .flip > span {
 	grid-area: 1 / 1;
 	white-space: nowrap;
-	transition: opacity 300ms ease, transform 300ms var(--ease-reveal);
+	transition: opacity var(--motion-entrance) var(--motion-ease),
+		transform var(--motion-entrance) var(--ease-reveal);
 }
 
 .flip-latin {
@@ -275,19 +370,19 @@ a {
 .cta-row {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 0.9rem;
-	margin-top: 2.5rem;
+	gap: var(--space-3);
+	margin-top: var(--space-10);
 }
 
 /* Buttons ------------------------------------------------------------------- */
 .btn {
 	display: inline-block;
-	padding: 0.7rem 1.4rem;
+	padding: var(--space-3) var(--space-5);
 	border-radius: 999px;
 	font-weight: 500;
 	text-decoration: none;
-	transition: background-color var(--transition-fast), border-color var(--transition-fast),
-		color var(--transition-fast), transform 100ms ease;
+	transition: background-color var(--motion-normal), border-color var(--motion-normal),
+		color var(--motion-normal), transform calc(var(--motion-fast)) var(--motion-ease);
 }
 
 .btn:active {
@@ -320,20 +415,20 @@ main > section + section {
 
 .section {
 	padding-block: var(--section-block);
-	scroll-margin-top: 5rem; /* keep anchored headings clear of the sticky header */
+	scroll-margin-top: calc(var(--space-8) + var(--space-4)); /* keep anchored headings clear of the sticky header */
 }
 
 .section-head {
 	display: grid;
 	align-content: start;
-	gap: 1rem;
-	margin-bottom: 2.75rem;
+	gap: var(--space-4);
+	margin-bottom: var(--space-11);
 }
 
 .eyebrow {
 	display: flex;
 	align-items: center;
-	gap: 0.75rem;
+	gap: var(--space-3);
 	margin: 0;
 	font-family: var(--font-mono);
 	font-size: 0.72rem;
@@ -344,7 +439,7 @@ main > section + section {
 
 .eyebrow::before {
 	content: '';
-	width: 2rem;
+	width: var(--space-8);
 	height: 1px;
 	background-color: var(--accent);
 	opacity: 0.7;
@@ -365,7 +460,7 @@ main > section + section {
 
 .prose {
 	max-width: var(--measure);
-	margin: 0 0 1.25rem;
+	margin: 0 0 var(--space-5);
 }
 
 .section-head .prose {
@@ -373,7 +468,7 @@ main > section + section {
 }
 
 .subheading {
-	margin: 2.5rem 0 1rem;
+	margin: var(--space-10) 0 var(--space-4);
 	font-size: 0.85rem;
 	font-weight: 600;
 	letter-spacing: 0.1em;
@@ -384,7 +479,7 @@ main > section + section {
 .chips {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 0.6rem;
+	gap: var(--space-3);
 	margin: 0;
 	padding: 0;
 	list-style: none;
@@ -393,7 +488,7 @@ main > section + section {
 .chips li {
 	border: 1px solid var(--border);
 	border-radius: 999px;
-	padding: 0.35rem 0.95rem;
+	padding: var(--space-2) var(--space-5);
 	font-family: var(--font-mono);
 	font-size: 0.78rem;
 	letter-spacing: 0.06em;
@@ -412,10 +507,9 @@ main > section + section {
 	border: 1px solid var(--border);
 	border-radius: 10px;
 	padding: clamp(1.5rem, 3vw, 2.25rem);
-	margin-bottom: 0.5rem;
-	transition: border-color 200ms ease;
-	box-shadow: 0 1px 3px color-mix(in srgb, var(--text) 4%, transparent),
-	0 4px 12px color-mix(in srgb, var(--text) 3%, transparent);
+	margin-bottom: var(--space-2);
+	transition: border-color var(--motion-normal);
+	box-shadow: var(--shadow-sm);
 }
 
 .project-card.featured:hover {
@@ -426,7 +520,7 @@ main > section + section {
 	display: flex;
 	align-items: baseline;
 	justify-content: space-between;
-	gap: 1rem;
+	gap: var(--space-4);
 	flex-wrap: wrap;
 }
 
@@ -440,12 +534,12 @@ main > section + section {
 
 .project-card.featured .project-desc {
 	max-width: 62ch;
-	margin: 0.9rem 0 0;
+	margin: var(--space-4) 0 0;
 	color: var(--muted);
 }
 
 .project-card.featured .tags {
-	margin-top: 1.1rem;
+	margin-top: var(--space-5);
 }
 
 .project-rows {
@@ -455,11 +549,11 @@ main > section + section {
 .project-row {
 	display: grid;
 	grid-template-columns: minmax(11rem, 1fr) minmax(0, 1.7fr) auto;
-	gap: 1.5rem;
+	gap: var(--space-6);
 	align-items: start;
-	padding-block: 1.6rem;
+	padding-block: var(--space-6);
 	border-top: 1px solid var(--border);
-	transition: background-color var(--transition-fast);
+	transition: background-color var(--motion-normal);
 }
 
 .project-row:hover {
@@ -471,7 +565,7 @@ main > section + section {
 	font-size: 1.05rem;
 	font-weight: 600;
 	letter-spacing: -0.01em;
-	transition: color var(--transition-fast);
+	transition: color var(--motion-normal);
 }
 
 .project-row:hover .project-title {
@@ -479,7 +573,7 @@ main > section + section {
 }
 
 .project-row .tags {
-	margin-top: 0.5rem;
+	margin-top: var(--space-2);
 }
 
 .project-desc {
@@ -491,7 +585,7 @@ main > section + section {
 .tags {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 0.45rem;
+	gap: var(--space-2);
 	margin: 0;
 	padding: 0;
 	list-style: none;
@@ -500,7 +594,7 @@ main > section + section {
 .tags li {
 	background-color: color-mix(in srgb, var(--text) 6%, transparent);
 	border-radius: 4px;
-	padding: 0.2rem 0.55rem;
+	padding: var(--space-1) var(--space-3);
 	font-family: var(--font-mono);
 	font-size: 0.68rem;
 	letter-spacing: 0.06em;
@@ -510,7 +604,7 @@ main > section + section {
 
 .project-links {
 	display: flex;
-	gap: 1.25rem;
+	gap: var(--space-5);
 	justify-self: end;
 }
 
@@ -532,25 +626,25 @@ main > section + section {
 
 .arrow {
 	display: inline-block;
-	transition: transform 200ms var(--ease-reveal);
+	transition: transform var(--motion-slow) var(--ease-reveal);
 }
 
 a:hover .arrow {
-	transform: translate(2px, -2px);
+	transform: translate(var(--space-1), calc(var(--space-1) * -1));
 }
 
 /* Contact ------------------------------------------------------------------------ */
 .contact-links {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 0.9rem;
-	margin-top: 0.5rem;
+	gap: var(--space-3);
+	margin-top: var(--space-2);
 }
 
 /* Footer ---------------------------------------------------------------------------- */
 .site-footer {
 	border-top: 1px solid var(--border);
-	padding-block: 2rem;
+	padding-block: var(--space-8);
 	color: var(--muted);
 	font-size: 0.875rem;
 }
@@ -559,7 +653,7 @@ a:hover .arrow {
 	display: flex;
 	align-items: baseline;
 	justify-content: space-between;
-	gap: 0.5rem 2rem;
+	gap: var(--space-2) var(--space-8);
 	flex-wrap: wrap;
 }
 
@@ -578,7 +672,7 @@ a:hover .arrow {
 @keyframes rise-in {
 	from {
 		opacity: 0;
-		transform: translateY(18px) scale(0.99);
+		transform: translateY(var(--motion-translate-hero)) scale(0.99);
 	}
 	to {
 		opacity: 1;
@@ -598,14 +692,14 @@ a:hover .arrow {
 /* Hero load sequence — pure CSS, runs even without JS */
 @media (prefers-reduced-motion: no-preference) {
 	.hero [data-rise] {
-		animation: rise-in 0.7s var(--ease-reveal) both;
-		animation-delay: calc(var(--i, 0) * 100ms + 60ms);
+		animation: rise-in var(--motion-duration) var(--ease-reveal) both;
+		animation-delay: calc(var(--i, 0) * var(--motion-stagger) + var(--motion-delay-hero));
 	}
 
 	.hero .name-rule {
 		transform-origin: left;
 		animation: rule-draw 0.8s var(--ease-reveal) both;
-		animation-delay: 0.55s;
+		animation-delay: var(--motion-delay-rule);
 	}
 }
 
@@ -613,8 +707,9 @@ a:hover .arrow {
    so the prerendered no-JS page is never invisible */
 html.js .reveal {
 	opacity: 0;
-	transform: translateY(28px) scale(0.995);
-	transition: opacity 0.7s ease, transform 0.7s var(--ease-reveal);
+	transform: translateY(var(--motion-translate-reveal)) scale(0.995);
+	transition: opacity var(--motion-duration) var(--motion-ease),
+		transform var(--motion-duration) var(--ease-reveal);
 	transition-delay: var(--d, 0ms);
 }
 
@@ -627,7 +722,7 @@ html.js .reveal.is-visible {
 @media (max-width: 48em) {
 	.project-row {
 		grid-template-columns: 1fr;
-		gap: 0.6rem;
+		gap: var(--space-3);
 	}
 
 	.project-links {
