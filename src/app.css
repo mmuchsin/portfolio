@@ -295,6 +295,10 @@ a {
 	position: relative;
 	isolation: isolate;
 	padding-block: clamp(4rem, 13vh, 8.5rem) var(--section-block);
+	display: grid;
+	grid-template-columns: 58% 42%;
+	align-items: center;
+	gap: var(--space-8);
 }
 
 /* Ambient warm glow behind the hero — static depth, no motion */
@@ -312,6 +316,39 @@ a {
 	pointer-events: none;
 }
 
+.hero-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.hero .hero-illustration {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/* SVG illustration block */
+.hero-illustration svg {
+	width: 100%;
+	max-width: 22rem;
+	aspect-ratio: 1 / 1;
+}
+
+/* Mobile collapse — stack text-first, illustration centered below */
+@media (max-width: 48em) {
+	.hero {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-10);
+		padding-block: clamp(3rem, 10vh, 5rem) var(--section-block);
+	}
+
+	.hero .hero-illustration svg {
+		width: 60%;
+		max-height: 28rem;
+	}
+}
+
 .hero h1 {
 	margin: 0;
 	font-family: var(--font-serif);
@@ -319,11 +356,6 @@ a {
 	font-weight: 600;
 	line-height: 1.05;
 	letter-spacing: -0.02em;
-}
-
-.hero .alias {
-	color: var(--accent);
-	font-style: italic;
 }
 
 .name-rule {
@@ -354,6 +386,20 @@ a {
 	align-items: flex-start;
 	gap: var(--space-2);
 	margin-top: var(--space-9);
+}
+
+/* SVG illustration block */
+.hero-illustration svg {
+	width: 100%;
+	max-width: 22rem;
+	aspect-ratio: 1 / 1;
+}
+
+@media (max-width: 48em) {
+	.hero .hero-illustration svg {
+		width: 60%;
+		max-height: 28rem;
+	}
 }
 
 .flip {
@@ -585,6 +631,9 @@ main > section + section {
 
 .project-rows {
 	border-bottom: 1px solid var(--border);
+	/* Match featured card internal padding — cancel wrap's gutter, set own */
+	margin-inline: calc(var(--gutter) * -1);
+	padding-inline: clamp(1.5rem, 3vw, 2.25rem);
 }
 
 .project-row {
