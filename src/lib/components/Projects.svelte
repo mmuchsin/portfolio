@@ -37,7 +37,7 @@
 
 		<div class="project-rows">
 			{#each rest as project, index (project.name)}
-				<article class="project-row reveal" style:--d="{160 + index * 90}ms">
+				<article class="project-row reveal" style:--d="{160 + index * 100}ms">
 					<div>
 						<h3 class="project-title">{project.name}</h3>
 						<ul class="tags">
