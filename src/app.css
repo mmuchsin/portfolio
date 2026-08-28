@@ -602,6 +602,13 @@ main > section + section {
 	background-color: color-mix(in srgb, var(--accent) 12%, var(--bg));
 }
 
+@media (max-width: 48em) {
+	.project-row:hover {
+		/* Skip background tint on stacked rows — tall wrapped content makes the highlight feel like a blob */
+		background-color: transparent;
+	}
+}
+
 .project-title {
 	margin: 0;
 	font-size: 1.05rem;
