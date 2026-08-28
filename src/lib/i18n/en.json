@@ -10,7 +10,6 @@
 	},
 	"hero": {
 		"name": "Muchsin",
-		"alias": "Ucin",
 		"tagline": "I build language tools for Arabic-script languages — from Pegon transliteration to RAG research.",
 		"sub": "Classical Islamic scholarship meets modern systems: my work spans NLP, retrieval-augmented generation, and web engineering.",
 		"flip_hint": "click to switch script",

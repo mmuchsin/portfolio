@@ -7,7 +7,7 @@
 </script>
 
 <section class="hero wrap" aria-labelledby="hero-title">
-	<h1 id="hero-title" data-rise style="--i: 0">{copy.name} <span class="alias">{copy.alias}</span></h1>
+	<h1 id="hero-title" data-rise style="--i: 0">{copy.name}</h1>
 	<span class="name-rule" aria-hidden="true"></span>
 	<p class="tagline" data-rise style="--i: 1">{copy.tagline}</p>
 	<p class="sub" data-rise style="--i: 2">{copy.sub}</p>

@@ -10,7 +10,6 @@
 	},
 	"hero": {
 		"name": "Muchsin",
-		"alias": "Ucin",
 		"tagline": "Saya membangun alat bahasa untuk bahasa beraksara Arab — dari transliterasi Pegon hingga riset RAG.",
 		"sub": "Keilmuan Islam klasik bertemu sistem modern: karya saya mencakup NLP, retrieval-augmented generation, dan rekayasa web.",
 		"flip_hint": "klik untuk ganti aksara",
@@ -34,7 +33,7 @@
 		"eyebrow": "Proyek terpilih",
 		"title": "Proyek",
 		"intro": "Beberapa hal yang pernah saya bangun — dari alat bahasa open-source hingga proyek klien.",
-		"live": "Aplikasi",
+		"live": "Tautan",
 		"repo_label": "Kode sumber",
 		"items": [
 			{

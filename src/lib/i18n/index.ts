@@ -20,7 +20,6 @@ export interface Dictionary {
 	nav: { about: string; projects: string; contact: string };
 	hero: {
 		name: string;
-		alias: string;
 		tagline: string;
 		sub: string;
 		flip_hint: string;
