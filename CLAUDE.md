@@ -1,6 +1,6 @@
 # Portfolio
 
-Personal portfolio website for M. Muchsin (Ucin), deployed on GitHub Pages.
+Personal portfolio website for Muchsin, deployed on GitHub Pages.
 
 ## Tech Stack
 

@@ -10,7 +10,7 @@ Personal portfolio website for **Muchsin**, deployed on GitHub Pages.
 | **Ucin** | Nickname / alias; rarely used externally — display name is just "Muchsin" |
 | **Santri** | Islamic student/scholar background; expertise in classical Arabic grammar (*nahwu*) and Pegon script |
 | **Pegon** | Javanese script for writing Arabic-script languages; core of Pegonku project |
-| **Nahwu** | Classical Arabic grammar; part of Ucin's scholarly background |
+| **Nahwu** | Classical Arabic grammar; part of Muchsin's scholarly background |
 | **Kitab** | Classical Islamic texts; domain of translation tracker project |
 | **RAG** | Retrieval-Augmented Generation; thesis research area |
 | **TQA** | Thesis Question Answering dataset; thesis playground project |
@@ -36,7 +36,7 @@ Personal portfolio website for **Muchsin**, deployed on GitHub Pages.
 ## Projects to Showcase
 
 1. **Pegonku** — Pegon transliteration engine (Nuxt + Python)
-   - Live: `https://kitabku.netlify.app`
+   - Live: `https://pegonku.netlify.app`
    - Repo: Public (Nuxt frontend + Python backend)
    - Tags: Nuxt, Python, NLP, Pegon, Transliteration
 
