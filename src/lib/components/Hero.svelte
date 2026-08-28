@@ -1,21 +1,24 @@
 <script lang="ts">
+	import { onMount, onDestroy } from 'svelte';
 	import type { Dictionary } from '$lib/i18n';
 
 	let { copy }: { copy: Dictionary['hero'] } = $props();
 
-	// Auto-cycle Arabic script — alternates every 3s so users can read both
-	let arabicOn = $state(false);
+	// Auto-cycle Arabic script — alternates every 4s so users can read both.
+	// Uses onMount/onDestroy (not $effect) to avoid reactive cycles with $state.
+	let arabicOn = $state(true);
 	let timer: ReturnType<typeof setTimeout> | null = null;
 
-	function schedule() {
+	function cycle() {
 		arabicOn = !arabicOn;
-		timer = setTimeout(schedule, 3000);
+		timer = setTimeout(cycle, 4000);
 	}
 
-	$effect(() => {
-		schedule();
-		return () => timer && clearTimeout(timer);
+	onMount(() => {
+		timer = setTimeout(cycle, 4000);
 	});
+
+	onDestroy(() => timer && clearTimeout(timer));
 </script>
 
 <section class="hero wrap" aria-labelledby="hero-title">

@@ -95,6 +95,11 @@
 	}
 
 	.mobile-nav {
+		position: fixed;
+		top: 4rem;
+		left: 0;
+		right: 0;
+		z-index: 20;
 		display: none;
 		flex-direction: column;
 		gap: 0;
