@@ -93,7 +93,7 @@
 
 <Header nav={t.nav} {lang} {setLang} />
 
-<main>
+<main id="main-content">
 	<Hero copy={t.hero} />
 	<About copy={t.about} />
 	<Projects copy={t.projects} />

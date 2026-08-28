@@ -13,6 +13,7 @@
 			type="button"
 			class:active={locale === lang}
 			aria-pressed={locale === lang}
+			aria-label={locale === 'en' ? 'Switch to English' : 'Switch to Indonesian'}
 			onclick={() => setLang(locale)}>
 			{locale.toUpperCase()}
 		</button>
