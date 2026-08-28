@@ -10,7 +10,7 @@
 		arabicOn = true;
 		const timer = setTimeout(() => {
 			arabicOn = false;
-		}, 4000);
+		}, 1000);
 		return () => clearTimeout(timer);
 	});
 </script>
