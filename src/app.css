@@ -255,7 +255,19 @@ a {
 	color: var(--text);
 }
 
+.site-nav a:hover {
+	color: var(--text);
+}
+
 .site-nav a:hover::after {
+	transform: scaleX(1);
+}
+
+.site-nav a.active {
+	color: var(--text);
+}
+
+.site-nav a.active::after {
 	transform: scaleX(1);
 }
 
@@ -271,7 +283,7 @@ a {
 	appearance: none;
 	background: transparent;
 	border: 0;
-	padding: var(--space-3) var(--space-4);
+	padding: 0.35rem 0.75rem;
 	font: inherit;
 	font-size: 0.8rem;
 	font-weight: 600;
@@ -288,6 +300,30 @@ a {
 .lang-toggle button.active {
 	background-color: var(--accent);
 	color: var(--accent-ink);
+}
+
+/* Script pause toggle */
+.script-pause {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--space-1);
+	padding: var(--space-1) var(--space-3);
+	border: 1px solid var(--border);
+	border-radius: var(--radius-full);
+	background: transparent;
+	color: var(--muted);
+	font-size: 0.75rem;
+	font-weight: 500;
+	letter-spacing: 0.04em;
+	cursor: pointer;
+	margin-top: var(--space-6);
+	transition: color var(--motion-normal), background-color var(--motion-normal), border-color var(--motion-normal);
+}
+
+.script-pause:hover {
+	color: var(--text);
+	border-color: var(--accent);
+	background-color: color-mix(in srgb, var(--accent) 8%, transparent);
 }
 
 /* Hero ---------------------------------------------------------------------- */
@@ -674,6 +710,7 @@ a:hover .arrow {
 .site-footer {
 	border-top: 1px solid var(--border);
 	padding-block: var(--space-8);
+	padding-bottom: max(var(--space-4), env(safe-area-inset-bottom));
 	color: var(--muted);
 	font-size: 0.875rem;
 }
@@ -697,6 +734,26 @@ a:hover .arrow {
 	opacity: 0.85;
 }
 
+/* Back to top ----------------------------------------------------------- */
+.back-to-top {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--space-1);
+	background: transparent;
+	border: 1px solid var(--border);
+	border-radius: var(--radius-full);
+	padding: var(--space-1) var(--space-3);
+	font-size: 0.72rem;
+	color: var(--muted);
+	cursor: pointer;
+	transition: color var(--motion-normal), background-color var(--motion-normal), border-color var(--motion-normal);
+}
+
+.back-to-top:hover {
+	color: var(--text);
+	border-color: var(--accent);
+	background-color: color-mix(in srgb, var(--accent) 8%, transparent);
+}
 /* Motion (ADR 0005) ------------------------------------------------------------------ */
 @keyframes rise-in {
 	from {

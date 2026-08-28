@@ -61,6 +61,35 @@
 		elements.forEach((el) => observer.observe(el));
 		return () => observer.disconnect();
 	});
+
+	// Active section tracking for nav highlight
+	let activeSection = $state('about');
+
+	const sectionIds = ['about', 'projects', 'contact'];
+
+	$effect(() => {
+		if (!('IntersectionObserver' in window)) return;
+
+		const callback: IntersectionObserverCallback = (entries) => {
+			for (const entry of entries) {
+				if (entry.isIntersecting) {
+					activeSection = entry.target.id;
+				}
+			}
+		};
+
+		const observer = new IntersectionObserver(callback, {
+			rootMargin: '-20% 0px -60% 0px',
+			threshold: 0
+		});
+
+		for (const id of sectionIds) {
+			const el = document.getElementById(id);
+			if (el) observer.observe(el);
+		}
+
+		return () => observer.disconnect();
+	});
 </script>
 
 <svelte:head>
@@ -91,7 +120,7 @@
 	</script>
 </svelte:head>
 
-<Header nav={t.nav} {lang} {setLang} />
+<Header nav={t.nav} {lang} {setLang} activeSection={activeSection} />
 
 <main id="main-content">
 	<Hero copy={t.hero} />

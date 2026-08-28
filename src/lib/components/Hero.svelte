@@ -3,15 +3,18 @@
 
 	let { copy }: { copy: Dictionary['hero'] } = $props();
 
-	// Auto-cycle Arabic script in the hero — cycles every 4s, no click needed
+	// Auto-cycle Arabic script — alternates every 3s so users can read both
 	let arabicOn = $state(false);
+	let timer: ReturnType<typeof setTimeout> | null = null;
+
+	function schedule() {
+		arabicOn = !arabicOn;
+		timer = setTimeout(schedule, 3000);
+	}
 
 	$effect(() => {
-		arabicOn = true;
-		const timer = setTimeout(() => {
-			arabicOn = false;
-		}, 1000);
-		return () => clearTimeout(timer);
+		schedule();
+		return () => timer && clearTimeout(timer);
 	});
 </script>
 
@@ -20,7 +23,7 @@
 		<h1 id="hero-title" data-rise style="--i: 0">{copy.name}</h1>
 		<span class="name-rule" aria-hidden="true"></span>
 
-		<!-- Auto-cycling Arabic script — no button, just text -->
+		<!-- Auto-cycling Arabic script -->
 		<div class="hero-script" class:arabic-on={arabicOn} data-rise style="--i: 2">
 			<span class="script-latin">assalamu&#8217;alaikum</span>
 			<span class="script-arabic" dir="rtl" lang="ar" aria-label="Assalamualaikum">السلام عليكم</span>
