@@ -156,9 +156,5 @@
 		.mobile-nav {
 			display: flex;
 		}
-
-		.lang-toggle {
-			display: none;
-		}
 	}
 </style>
