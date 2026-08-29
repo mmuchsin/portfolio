@@ -9,8 +9,6 @@
 
 	const STORAGE_KEY = 'portfolio-lang';
 
-	// ADR 0003: locale lives in localStorage, never in the URL. The static
-	// HTML is always EN; a stored choice is applied on hydration.
 	let initial: Locale = 'en';
 	try {
 		const stored = localStorage.getItem(STORAGE_KEY);
@@ -26,8 +24,7 @@
 		try {
 			localStorage.setItem(STORAGE_KEY, next);
 		} catch {
-			// Storage unavailable (blocked or disabled) — the toggle still
-			// works for this visit, it just won't persist.
+			// Storage unavailable — toggle still works for this visit.
 		}
 	}
 
@@ -36,8 +33,7 @@
 		document.title = t.meta.title;
 	});
 
-	// ADR 0005: scroll reveals — one observer, class toggle, CSS does the motion.
-	// Elements without JS never get the hidden state (gated behind html.js in CSS).
+	// Scroll reveals — one observer, class toggle, CSS does the motion.
 	$effect(() => {
 		const elements = Array.from(document.querySelectorAll<HTMLElement>('.reveal'));
 		if (!('IntersectionObserver' in window)) {
