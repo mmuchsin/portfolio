@@ -26,10 +26,10 @@
 	<div class="wrap">
 		<a class="brand" href={`${base}/`}>Muchsin</a>
 		<nav class="site-nav" aria-label="Sections">
-			<a href={`${base}/blog`} aria-current="page">Blog</a>
 			<a href={`${base}/#about`}>About</a>
 			<a href={`${base}/#projects`}>Projects</a>
 			<a href={`${base}/#contact`}>Contact</a>
+			<a href={`${base}/blog`} aria-current="page">Blog</a>
 		</nav>
 		<LanguageToggle {lang} {setLang} />
 		<button
@@ -44,10 +44,10 @@
 	</div>
 
 	<nav class="mobile-nav" aria-label="Sections mobile">
-		<a href={`${base}/blog`}>Blog</a>
 		<a href={`${base}/#about`}>About</a>
 		<a href={`${base}/#projects`}>Projects</a>
 		<a href={`${base}/#contact`}>Contact</a>
+		<a href={`${base}/blog`}>Blog</a>
 	</nav>
 </header>
 
