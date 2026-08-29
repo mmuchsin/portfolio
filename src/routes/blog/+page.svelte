@@ -7,20 +7,26 @@
 
 	let selectedTag = $state<string | null>(null);
 	let selectedCategory = $state<string | null>(null);
+	let selectedLang = $state<'en' | 'id' | null>(null);
 
 	const posts = $derived(data.posts.filter((post: BlogPost) => {
 		const tagMatch = !selectedTag || post.tags.includes(selectedTag);
 		const catMatch = !selectedCategory || post.categories.includes(selectedCategory);
-		return tagMatch && catMatch;
+		const langMatch = !selectedLang || post.lang === selectedLang;
+		return tagMatch && catMatch && langMatch;
 	}));
 
 	const allTags = $derived(Array.from(new Set(data.posts.flatMap((p: BlogPost) => p.tags))).sort() as string[]);
 	const allCategories = $derived(Array.from(new Set(data.posts.flatMap((p: BlogPost) => p.categories))).sort() as string[]);
+	const allLangs = $derived(Array.from(new Set(data.posts.map((p: BlogPost) => p.lang))).sort() as ('en' | 'id')[]);
 
 	function clearFilters() {
 		selectedTag = null;
 		selectedCategory = null;
+		selectedLang = null;
 	}
+
+	const langLabel = (lang: string) => lang === 'id' ? 'Bahasa Indonesia' : 'English';
 
 	function isActive(value: string, selected: string | null): boolean {
 		return selected === value;
@@ -33,7 +39,30 @@
 		<p>Learning notes and technical reflections</p>
 	</header>
 
-	<!-- Filters -->
+	<!-- Language Filter -->
+	{#if allLangs.length > 1}
+		<div class="filters">
+			<div class="filter-group">
+				<span class="filter-label">Language:</span>
+				<button
+					class="filter-btn {isActive('all', selectedLang)}"
+					onclick={() => { selectedLang = null; }}
+				>
+					All
+				</button>
+				{#each allLangs as lang}
+					<button
+						class="filter-btn {isActive(lang, selectedLang)}"
+						onclick={() => { selectedLang = lang; }}
+					>
+						{langLabel(lang)}
+					</button>
+				{/each}
+			</div>
+		</div>
+	{/if}
+
+	<!-- Tag & Category Filters -->
 	{#if allTags.length > 0 || allCategories.length > 0}
 		<div class="filters">
 			{#if allCategories.length > 0}
@@ -73,7 +102,7 @@
 				</div>
 			{/if}
 
-			{#if selectedTag || selectedCategory}
+			{#if selectedTag || selectedCategory || selectedLang}
 				<button class="clear-btn" onclick={clearFilters}>Clear filters</button>
 			{/if}
 		</div>
@@ -92,6 +121,7 @@
 							{#if post.categories.length > 0}
 								<span class="post-category">{post.categories[0]}</span>
 							{/if}
+							<span class="post-lang">{langLabel(post.lang)}</span>
 						</div>
 						<h2 class="post-title">{post.title}</h2>
 						<p class="post-description">{post.description}</p>
@@ -223,6 +253,14 @@
 	.post-category {
 		background: var(--accent);
 		color: white;
+		padding: 0.125rem 0.5rem;
+		border-radius: 9999px;
+		font-size: 0.75rem;
+	}
+
+	.post-lang {
+		background: var(--muted);
+		color: var(--bg);
 		padding: 0.125rem 0.5rem;
 		border-radius: 9999px;
 		font-size: 0.75rem;

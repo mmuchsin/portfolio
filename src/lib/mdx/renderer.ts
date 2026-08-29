@@ -88,7 +88,8 @@ export function extractFrontmatter(mdxContent: string): { frontmatter: BlogPostF
 				date: new Date().toISOString().split('T')[0],
 				tags: [],
 				categories: [],
-				description: ''
+				description: '',
+				lang: 'en'
 			},
 			content: mdxContent
 		};
@@ -129,6 +130,9 @@ export function extractFrontmatter(mdxContent: string): { frontmatter: BlogPostF
 			case 'description':
 				frontmatter.description = value.replace(/^["']|["']$/g, '');
 				break;
+			case 'lang':
+				frontmatter.lang = (value.trim().toLowerCase() === 'id' ? 'id' : 'en') as 'en' | 'id';
+				break;
 		}
 	}
 
@@ -138,7 +142,8 @@ export function extractFrontmatter(mdxContent: string): { frontmatter: BlogPostF
 			date: frontmatter.date ?? new Date().toISOString().split('T')[0],
 			tags: frontmatter.tags ?? [],
 			categories: frontmatter.categories ?? [],
-			description: frontmatter.description ?? ''
+			description: frontmatter.description ?? '',
+			lang: frontmatter.lang ?? 'en'
 		},
 		content
 	};

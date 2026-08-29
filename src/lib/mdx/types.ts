@@ -4,6 +4,7 @@ export interface BlogPostFrontmatter {
 	tags: string[];
 	categories: string[];
 	description: string;
+	lang: 'en' | 'id';
 }
 
 export interface BlogPost extends BlogPostFrontmatter {
