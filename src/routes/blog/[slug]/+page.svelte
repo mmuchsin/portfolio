@@ -6,7 +6,7 @@
 
 	let { data }: { data: PageData } = $props();
 
-	const post = data.post as BlogPost;
+	const post = $derived(data.post as BlogPost);
 
 	if (!post) {
 		throw error(404, 'Not found');

@@ -7,7 +7,7 @@ import path from 'node:path';
 // This avoids hardcoding entries in svelte.config.js — new posts
 // are automatically included without config changes.
 function discoverBlogEntries() {
-	const entries = ['/blog']; // blog index page
+	const entries = ['/', '/blog']; // blog index page
 	const blogDir = path.resolve('src/content/blog');
 
 	try {
