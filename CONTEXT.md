@@ -15,10 +15,13 @@ Personal portfolio website for **Muchsin**, deployed on GitHub Pages.
 | **RAG** | Retrieval-Augmented Generation; thesis research area |
 | **TQA** | Thesis Question Answering dataset; thesis playground project |
 | **HPC** | High-Performance Computing; UNNES cluster used for thesis work |
+| **locale** | The language prefix segment in the URL path (`en` or `id`). Drives all language logic — translations, content filtering, date formatting, document lang attribute. Replaces the old store-based approach. |
 
 ## Current State
 
 **v1 implemented (2026-08-27):** single-page site built with SvelteKit + TypeScript (strict) + Svelte 5 runes; fully static via `@sveltejs/adapter-static`; EN/ID toggle persisted in localStorage. Deploys to GitHub Pages via GitHub Actions on push to `main`.
+
+**v2 locale-based routing (in progress):** migrating from store-based language filtering to URL-driven locales (`/en/`, `/id/`). Root path auto-redirects based on browser language. Multi-page sections (About, Projects, Contact as separate routes). Hero only on home page. Blog posts enforced per-locale via frontmatter `lang`. Custom bilingual 404 for unsupported locales. Removes `lang-store.ts` entirely — locale comes from URL path.
 
 **v1.1 design pass (2026-08-27):** three-voice type system (serif display / sans body / mono utility), featured + list project layout, script-flip hero signature (`assalamu'alaikum` ↔ `السلام عليكم`), orchestrated motion per ADR 0005 (load stagger, scroll reveals, micro-interactions).
 

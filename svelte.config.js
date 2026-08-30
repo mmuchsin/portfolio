@@ -7,7 +7,18 @@ import path from 'node:path';
 // This avoids hardcoding entries in svelte.config.js — new posts
 // are automatically included without config changes.
 function discoverBlogEntries() {
-	const entries = ['/', '/blog']; // blog index page
+	const entries = [];
+	const locales = ['en', 'id'];
+
+	// Main site pages (locale-prefixed)
+	for (const locale of locales) {
+		entries.push(`/${locale}/`);
+		entries.push(`/${locale}/about`);
+		entries.push(`/${locale}/projects`);
+		entries.push(`/${locale}/contact`);
+		entries.push(`/${locale}/blog`);
+	}
+
 	const blogDir = path.resolve('src/content/blog');
 
 	try {
@@ -15,7 +26,10 @@ function discoverBlogEntries() {
 			.filter(d => d.isDirectory());
 
 		for (const dir of dirs) {
-			entries.push(`/blog/${dir.name}`); // individual post
+			// Individual posts per locale
+			for (const locale of locales) {
+				entries.push(`/${locale}/blog/${dir.name}`);
+			}
 
 			// Read frontmatter to discover tags
 			const indexFile = path.join(blogDir, dir.name, 'index.mdx');
@@ -29,7 +43,10 @@ function discoverBlogEntries() {
 					.split(',')
 					.map(t => t.trim());
 				for (const tag of tags) {
-					entries.push(`/blog/tags/${tag}`); // tag filter page
+					// Tag pages per locale
+					for (const locale of locales) {
+						entries.push(`/${locale}/blog/tags/${tag}`);
+					}
 				}
 			}
 		}

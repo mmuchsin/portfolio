@@ -1,37 +1,25 @@
 <script lang="ts">
+	import type { Snippet } from 'svelte';
 	import { base } from '$app/paths';
-	import LanguageToggle from '$lib/components/LanguageToggle.svelte';
-	import type { Locale } from '$lib/i18n';
+	import type { Locale, Dictionary } from '$lib/i18n';
 
-	// ADR 0003: locale lives in localStorage, never in the URL.
-	let lang = $state<Locale>('en');
-	try {
-		const stored = localStorage.getItem('portfolio-lang');
-		if (stored === 'en' || stored === 'id') lang = stored;
-	} catch {
-		// Storage unavailable — default to EN.
-	}
-
-	function setLang(next: Locale) {
-		lang = next;
-		try {
-			localStorage.setItem('portfolio-lang', next);
-		} catch {
-			// Storage unavailable — toggle still works for this visit.
-		}
-	}
+	let { locale = 'en' as Locale, nav = {} as Dictionary['nav'], children }: {
+		locale?: Locale;
+		nav?: Dictionary['nav'];
+		children?: Snippet;
+	} = $props();
 </script>
 
 <header class="site-header">
 	<div class="wrap">
-		<a class="brand" href={`${base}/`}>Muchsin</a>
+		<a class="brand" href={`${base}/${locale}/`}>Muchsin</a>
 		<nav class="site-nav" aria-label="Sections">
-			<a href={`${base}/#about`}>About</a>
-			<a href={`${base}/#projects`}>Projects</a>
-			<a href={`${base}/#contact`}>Contact</a>
-			<a href={`${base}/blog`} aria-current="page">Blog</a>
+			{#each Object.entries(nav) as [key, label]}
+				<a href={`${base}/${locale}/${key === 'home' ? '' : key}`}>
+					{label}
+				</a>
+			{/each}
 		</nav>
-		<LanguageToggle {lang} {setLang} />
 		<button
 			type="button"
 			class="hamburger"
@@ -44,14 +32,15 @@
 	</div>
 
 	<nav class="mobile-nav" aria-label="Sections mobile">
-		<a href={`${base}/#about`}>About</a>
-		<a href={`${base}/#projects`}>Projects</a>
-		<a href={`${base}/#contact`}>Contact</a>
-		<a href={`${base}/blog`}>Blog</a>
+		{#each Object.entries(nav) as [key, label]}
+			<a href={`${base}/${locale}/${key === 'home' ? '' : key}`}>
+				{label}
+			</a>
+		{/each}
 	</nav>
 </header>
 
-<slot />
+{@render children?.()}
 
 <style>
 	.hamburger {
@@ -74,18 +63,6 @@
 		transition: transform 0.3s ease, opacity 0.3s ease;
 	}
 
-	.hamburger[aria-expanded='true'] .bar-top {
-		transform: translateY(6px) rotate(45deg);
-	}
-
-	.hamburger[aria-expanded='true'] .bar-mid {
-		opacity: 0;
-	}
-
-	.hamburger[aria-expanded='true'] .bar-bot {
-		transform: translateY(-6px) rotate(-45deg);
-	}
-
 	.mobile-nav {
 		position: fixed;
 		top: 4rem;
@@ -98,10 +75,6 @@
 		background-color: color-mix(in srgb, var(--bg) 92%, transparent);
 		backdrop-filter: blur(10px);
 		border-bottom: 1px solid var(--border);
-	}
-
-	.mobile-nav.open {
-		display: flex;
 	}
 
 	.mobile-nav a {

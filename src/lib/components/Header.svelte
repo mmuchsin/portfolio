@@ -1,85 +1,57 @@
 <script lang="ts">
 	import { base } from '$app/paths';
-	import LanguageToggle from './LanguageToggle.svelte';
 	import type { Dictionary, Locale } from '$lib/i18n';
 
-	let { nav, lang, setLang, activeSection }: {
+	let { locale, nav, setLang }: {
+		locale: Locale;
 		nav: Dictionary['nav'];
-		lang: Locale;
 		setLang: (locale: Locale) => void;
-		activeSection: string;
 	} = $props();
 
-	let menuOpen = $state(false);
-
-	function closeMenu() {
-		menuOpen = false;
-	}
-
 	function isSectionActive(sectionId: string): boolean {
-		if (sectionId === 'blog') return activeSection === 'blog';
-		return activeSection === sectionId;
+		return false; // No active tracking on locale layout
 	}
 </script>
 
 <header class="site-header">
 	<div class="wrap">
-		<a class="brand" href={`${base}/`}>Muchsin</a>
+		<a class="brand" href={`${base}/${locale}/`}>Muchsin</a>
 		<nav class="site-nav" aria-label="Sections">
 			{#each Object.entries(nav) as [key, label]}
-				{#if key === 'blog'}
-					<!-- External page link -->
-					<a
-						href={`${base}/blog`}
-						class:active={isSectionActive('blog')}
-						aria-current={isSectionActive('blog') ? 'page' : undefined}
-						onclick={closeMenu}>
-						{label}
-					</a>
-				{:else}
-					{@const sectionId = key === 'about' ? 'about' : key === 'projects' ? 'projects' : 'contact'}
-					<a
-						href={`#${sectionId}`}
-						class:active={isSectionActive(sectionId)}
-						aria-current={isSectionActive(sectionId) ? 'page' : undefined}
-						onclick={closeMenu}>
-						{label}
-					</a>
-				{/if}
+				<a href={`${base}/${locale}/${key === 'home' ? '' : key}`}>
+					{label}
+				</a>
 			{/each}
 		</nav>
-		<LanguageToggle {lang} {setLang} />
+		<div class="lang-toggle" role="group" aria-label="Language">
+			{#each ['en', 'id'] as l}
+				<button
+					type="button"
+					class:active={l === locale}
+					aria-pressed={l === locale}
+					onclick={() => setLang(l as 'en' | 'id')}>
+					{l.toUpperCase()}
+				</button>
+			{/each}
+		</div>
 		<button
 			type="button"
 			class="hamburger"
-			aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-			aria-expanded={menuOpen}
-			onclick={() => (menuOpen = !menuOpen)}>
+			aria-label="Open menu"
+			onclick={() => document.querySelector('.mobile-nav')?.classList.toggle('open')}>
 			<span class="bar bar-top"></span>
 			<span class="bar bar-mid"></span>
 			<span class="bar bar-bot"></span>
 		</button>
 	</div>
 
-	{#if menuOpen}
-		<nav class="mobile-nav" aria-label="Sections mobile">
-			{#each Object.entries(nav) as [key, label]}
-				{#if key === 'blog'}
-					<a href={`${base}/blog`} onclick={closeMenu}>
-						{label}
-					</a>
-				{:else}
-					{@const sectionId = key === 'about' ? 'about' : key === 'projects' ? 'projects' : 'contact'}
-					<a
-						href={`#${sectionId}`}
-						class:active={isSectionActive(sectionId)}
-						onclick={closeMenu}>
-						{label}
-					</a>
-				{/if}
-			{/each}
-		</nav>
-	{/if}
+	<nav class="mobile-nav" aria-label="Sections mobile">
+		{#each Object.entries(nav) as [key, label]}
+			<a href={`${base}/${locale}/${key === 'home' ? '' : key}`}>
+				{label}
+			</a>
+		{/each}
+	</nav>
 </header>
 
 <style>
@@ -100,20 +72,37 @@
 		height: 2px;
 		background-color: var(--text);
 		border-radius: 1px;
-		transition: transform var(--motion-normal) var(--ease-reveal),
-					opacity var(--motion-normal) var(--ease-reveal);
+		transition: transform 0.3s ease, opacity 0.3s ease;
 	}
 
-	.hamburger[aria-expanded='true'] .bar-top {
-		transform: translateY(6px) rotate(45deg);
+
+	.lang-toggle {
+		display: flex;
+		gap: 0.25rem;
 	}
 
-	.hamburger[aria-expanded='true'] .bar-mid {
-		opacity: 0;
+	.lang-toggle button {
+		padding: 0.25rem 0.625rem;
+		border: 1px solid var(--border);
+		background: transparent;
+		border-radius: 0.375rem;
+		font-size: 0.8rem;
+		font-weight: 600;
+		color: var(--text);
+		cursor: pointer;
+		transition: all 0.2s;
+		white-space: nowrap;
 	}
 
-	.hamburger[aria-expanded='true'] .bar-bot {
-		transform: translateY(-6px) rotate(-45deg);
+	.lang-toggle button:hover {
+		border-color: var(--accent);
+		background: var(--surface);
+	}
+
+	.lang-toggle button.active {
+		background: var(--accent);
+		color: white;
+		border-color: var(--accent);
 	}
 
 	.mobile-nav {
@@ -130,18 +119,14 @@
 		border-bottom: 1px solid var(--border);
 	}
 
+
 	.mobile-nav a {
 		display: block;
-		padding: 1rem var(--gutter);
+		padding: 1rem 1.5rem;
 		color: var(--muted);
 		text-decoration: none;
 		font-size: 1.05rem;
 		border-top: 1px solid var(--border);
-		transition: color var(--motion-normal), background-color var(--motion-normal);
-	}
-
-	.mobile-nav a.active {
-		color: var(--text);
 	}
 
 	@media (max-width: 36em) {
@@ -151,10 +136,6 @@
 
 		.site-nav {
 			display: none !important;
-		}
-
-		.mobile-nav {
-			display: flex;
 		}
 	}
 </style>
