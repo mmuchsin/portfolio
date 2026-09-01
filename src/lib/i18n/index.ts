@@ -22,7 +22,6 @@ export interface Dictionary {
 		name: string;
 		tagline: string;
 		sub: string;
-		flip_hint: string;
 		cta_projects: string;
 		cta_contact: string;
 	};

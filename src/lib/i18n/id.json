@@ -14,7 +14,6 @@
     "name": "Muchsin",
     "tagline": "Saya membangun alat bahasa untuk bahasa beraksara Arab \u2014 dari transliterasi Pegon hingga riset RAG.",
     "sub": "Keilmuan Islam klasik bertemu sistem modern: karya saya mencakup NLP, retrieval-augmented generation, dan rekayasa web.",
-    "flip_hint": "klik untuk ganti aksara",
     "cta_projects": "Lihat karya saya",
     "cta_contact": "Hubungi saya"
   },
