@@ -1,8 +1,11 @@
 import { loadAllBlogPosts } from '$lib/mdx/renderer.js';
 import path from 'node:path';
 import { translations, LOCALES } from '$lib/i18n';
+import type { LayoutServerLoad } from './$types';
 
-export const load = async ({ request }: { request: Request }) => {
+export const trailingSlash = 'always' as const;
+
+export const load: LayoutServerLoad = async ({ request }) => {
 	const blogDir = path.resolve(process.cwd(), 'src', 'content', 'blog');
 	const posts = await loadAllBlogPosts(blogDir);
 

@@ -10,6 +10,9 @@ function discoverBlogEntries() {
 	const entries = [];
 	const locales = ['en', 'id'];
 
+	// Root redirect page
+	entries.push('/');
+
 	// Main site pages (locale-prefixed)
 	for (const locale of locales) {
 		entries.push(`/${locale}/`);
@@ -63,8 +66,12 @@ const config = {
 	kit: {
 		adapter: adapter({
 			// Parameterized blog routes ([slug], [tag]) are prerendered via
-			// explicit entries discovered from the content directory.
-			strict: false
+			// explicit entries discovered from the content directory, so
+			// strict mode is satisfied. The fallback renders +error.svelte
+			// into build/404.html so GitHub Pages serves our full 404 page
+			// (with app shell) for unknown paths instead of its stub.
+			strict: true,
+			fallback: '404.html'
 		}),
 		// GitHub Pages subpath (ADR 0001)
 		paths: {
@@ -74,7 +81,8 @@ const config = {
 		// automatically prerendered without config changes.
 		prerender: {
 			entries: discoverBlogEntries(),
-			handleUnseenRoutes: 'ignore'
+			handleUnseenRoutes: 'warn',
+			handleMissingId: 'ignore'
 		}
 	}
 };

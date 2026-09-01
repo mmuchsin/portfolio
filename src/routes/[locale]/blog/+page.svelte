@@ -72,7 +72,7 @@
 						All
 					</button>
 					{#each allTags as tag}
-						<a href={`${base}/${locale}/blog/tags/${tag}`} class="filter-btn {isActive(tag, selectedTag)}">
+						<a href={`${base}/${locale}/blog/tags/${tag}/`} class="filter-btn {isActive(tag, selectedTag)}">
 							#{tag}
 						</a>
 					{/each}
@@ -92,7 +92,7 @@
 		<div class="post-list">
 			{#each filteredPosts as post (post.slug)}
 				<article class="post-card">
-					<a href={`${base}/${locale}/blog/${post.slug}`} class="post-link">
+					<a href={`${base}/${locale}/blog/${post.slug}/`} class="post-link">
 						<div class="post-meta">
 							<span class="post-date">{new Date(post.date).toLocaleDateString(locale === 'id' ? 'id-ID' : 'en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
 							{#if post.categories.length > 0}

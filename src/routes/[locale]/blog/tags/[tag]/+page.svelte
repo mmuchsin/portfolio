@@ -18,7 +18,7 @@
 
 <main id="main-content" class="tag-page">
 	<header class="tag-header">
-		<a href={`${base}/blog`} class="back-link">{t.blog_back ?? '← Back to Blog'}</a>
+		<a href={`${base}/${locale}/blog/`} class="back-link">{t.blog_back ?? '← Back to Blog'}</a>
 		<h1>{t.tag_heading} <span class="tag-name">#{tag}</span></h1>
 	</header>
 
@@ -28,7 +28,7 @@
 		<div class="post-list">
 			{#each posts as post (post.slug)}
 				<article class="post-card">
-					<a href={`${base}/blog/${post.slug}`} class="post-link">
+					<a href={`${base}/${locale}/blog/${post.slug}/`} class="post-link">
 						<div class="post-meta">
 							<span class="post-date">{new Date(post.date).toLocaleDateString(locale === 'id' ? 'id-ID' : 'en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
 							{#if post.categories.length > 0}

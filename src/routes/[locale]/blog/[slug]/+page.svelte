@@ -27,7 +27,7 @@
 			{#if post.tags.length > 0}
 				<div class="post-tags">
 					{#each post.tags as tag}
-						<a href={`${base}/${data.locale}/blog/tags/${tag}`} class="tag">#{tag}</a>
+						<a href={`${base}/${data.locale}/blog/tags/${tag}/`} class="tag">#{tag}</a>
 					{/each}
 				</div>
 			{/if}
@@ -37,7 +37,7 @@
 		<div class="post-content">{@html post.content}</div>
 
 			<!-- Back to blog -->
-			<a href={`${base}/blog`} class="back-link">{t.blog_back}</a>
+			<a href={`${base}/${data.locale}/blog`} class="back-link">{t.blog_back}</a>
 		</article>
 	{:else}
 		<p>Post not found</p>
