@@ -11,6 +11,7 @@ node_modules
 .claude/
 .codex/
 .agents/
+.mcp.json
 
 /playwright-report
 /test-results
