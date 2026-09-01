@@ -21,7 +21,7 @@ Personal portfolio website for **Muchsin**, deployed on GitHub Pages.
 
 **v1 implemented (2026-08-27):** single-page site built with SvelteKit + TypeScript (strict) + Svelte 5 runes; fully static via `@sveltejs/adapter-static`; EN/ID toggle persisted in localStorage. Deploys to GitHub Pages via GitHub Actions on push to `main`.
 
-**v2 locale-based routing (in progress):** migrating from store-based language filtering to URL-driven locales (`/en/`, `/id/`). Root path auto-redirects based on browser language. Multi-page sections (About, Projects, Contact as separate routes). Hero only on home page. Blog posts enforced per-locale via frontmatter `lang`. Custom bilingual 404 for unsupported locales. Removes `lang-store.ts` entirely — locale comes from URL path.
+**v2 locale-based routing (in progress):** migrating from store-based language filtering to URL-driven locales (`/en/`, `/id/`). Root path auto-redirects based on browser language. One-page home kept (Hero, About, Projects, Contact on `/en/` / `/id/`); standalone section routes (`/en/about` etc.) retained as deep links; nav targets home-page anchors. Blog posts enforced per-locale via frontmatter `lang`. Custom bilingual 404 for unsupported locales. Removes `lang-store.ts` entirely — locale comes from URL path.
 
 **v1.1 design pass (2026-08-27):** three-voice type system (serif display / sans body / mono utility), featured + list project layout, script-flip hero signature (`assalamu'alaikum` ↔ `السلام عليكم`), orchestrated motion per ADR 0005 (load stagger, scroll reveals, micro-interactions).
 
@@ -32,8 +32,8 @@ Personal portfolio website for **Muchsin**, deployed on GitHub Pages.
 - Tech stack: SvelteKit + TypeScript (strict) + Svelte 5 runes + `@sveltejs/adapter-static`
 - Deploy: GitHub Pages via GitHub Actions (`kit.paths.base: '/portfolio'`)
 - Design: Light editorial theme, three-voice typography (serif / sans / mono), warm gold accent
-- Bilingual: EN/ID with language toggle persisted in localStorage
-- Structure: Single-page (Header, Hero, About, Projects, Contact, Footer)
+- Bilingual: EN/ID via URL-driven locale routing (`/en/`, `/id/`)
+- Structure: One-page home (Header, Hero, About, Projects, Contact, Footer) with standalone section routes as deep links
 - All copy flows through typed i18n dictionary (`src/lib/i18n/*.json`) — zero hardcoded text in components
 
 ## Projects to Showcase

@@ -1,5 +1,8 @@
 <script lang="ts">
-	import { base } from '$app/paths';
+	import { resolve } from '$app/paths';
+	import type { PathnameWithSearchOrHash } from '$app/types';
+	import { page } from '$app/state';
+	import { observeActiveSection } from '$lib/active-section';
 	import type { Dictionary, Locale } from '$lib/i18n';
 
 	let { locale, nav, setLang }: {
@@ -8,23 +11,65 @@
 		setLang: (locale: Locale) => void;
 	} = $props();
 
-	function isSectionActive(sectionId: string): boolean {
-		return false; // No active tracking on locale layout
+	let menuOpen = $state(false);
+	let activeSection = $state<string | null>(null);
+
+	const onHomeRoute = $derived(page.route.id === '/[locale]');
+	const onBlogRoute = $derived(page.route.id?.startsWith('/[locale]/blog') ?? false);
+
+	// On standalone section routes (/en/about etc.) the section fills the
+	// page, so its nav key is current regardless of scroll tracking.
+	const sectionRoute = $derived.by(() => {
+		const match = /^\/\[locale\]\/(about|projects|contact)$/.exec(page.route.id ?? '');
+		return match?.[1] ?? null;
+	});
+
+	$effect(() => {
+		// Reading page.url.pathname tracks the route: this effect re-runs on
+		// every navigation. The Header sits in the (persistent) locale layout
+		// and never remounts, so the section observer must re-attach to
+		// whatever sections the freshly rendered page provides.
+		void page.url.pathname;
+		const cleanup = observeActiveSection((id) => (activeSection = id));
+		return () => cleanup?.();
+	});
+
+	function closeMenu() {
+		menuOpen = false;
+	}
+
+	// Home and blog get their own routes; sections live on the one-page
+	// home and link to their anchors (typed pathname strings, hence cast).
+	function navPath(key: string): PathnameWithSearchOrHash {
+		if (key === 'blog') return `/${locale}/blog/` as PathnameWithSearchOrHash;
+		if (key === 'home') return `/${locale}/` as PathnameWithSearchOrHash;
+		return `/${locale}/#${key}` as PathnameWithSearchOrHash;
+	}
+
+	function isSectionActive(key: string): boolean {
+		if (key === 'home') return onHomeRoute && !activeSection;
+		if (key === 'blog') return onBlogRoute;
+		if (sectionRoute === key) return true;
+		return activeSection === key;
 	}
 </script>
 
 <header class="site-header">
 	<div class="wrap">
-		<a class="brand" href={`${base}/${locale}/`}>Muchsin</a>
+		<a class="brand" href={resolve(`/${locale}/`)}>Muchsin</a>
 		<nav class="site-nav" aria-label="Sections">
-			{#each Object.entries(nav) as [key, label]}
-				<a href={`${base}/${locale}/${key === 'home' ? '' : key}`}>
+			{#each Object.entries(nav) as [key, label] (key)}
+				<a
+					href={resolve(navPath(key))}
+					class:active={isSectionActive(key)}
+					aria-current={isSectionActive(key) ? 'page' : undefined}
+					onclick={closeMenu}>
 					{label}
 				</a>
 			{/each}
 		</nav>
 		<div class="lang-toggle" role="group" aria-label="Language">
-			{#each ['en', 'id'] as l}
+			{#each ['en', 'id'] as l (l)}
 				<button
 					type="button"
 					class:active={l === locale}
@@ -37,21 +82,28 @@
 		<button
 			type="button"
 			class="hamburger"
-			aria-label="Open menu"
-			onclick={() => document.querySelector('.mobile-nav')?.classList.toggle('open')}>
+			aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+			aria-expanded={menuOpen}
+			onclick={() => (menuOpen = !menuOpen)}>
 			<span class="bar bar-top"></span>
 			<span class="bar bar-mid"></span>
 			<span class="bar bar-bot"></span>
 		</button>
 	</div>
 
-	<nav class="mobile-nav" aria-label="Sections mobile">
-		{#each Object.entries(nav) as [key, label]}
-			<a href={`${base}/${locale}/${key === 'home' ? '' : key}`}>
-				{label}
-			</a>
-		{/each}
-	</nav>
+	{#if menuOpen}
+		<nav class="mobile-nav" aria-label="Sections mobile">
+			{#each Object.entries(nav) as [key, label] (key)}
+				<a
+					href={resolve(navPath(key))}
+					class:active={isSectionActive(key)}
+					aria-current={isSectionActive(key) ? 'page' : undefined}
+					onclick={closeMenu}>
+					{label}
+				</a>
+			{/each}
+		</nav>
+	{/if}
 </header>
 
 <style>
@@ -72,9 +124,22 @@
 		height: 2px;
 		background-color: var(--text);
 		border-radius: 1px;
-		transition: transform 0.3s ease, opacity 0.3s ease;
+		transition:
+			transform var(--motion-normal) var(--ease-reveal),
+			opacity var(--motion-normal) var(--ease-reveal);
 	}
 
+	.hamburger[aria-expanded='true'] .bar-top {
+		transform: translateY(6px) rotate(45deg);
+	}
+
+	.hamburger[aria-expanded='true'] .bar-mid {
+		opacity: 0;
+	}
+
+	.hamburger[aria-expanded='true'] .bar-bot {
+		transform: translateY(-6px) rotate(-45deg);
+	}
 
 	.lang-toggle {
 		display: flex;
@@ -119,14 +184,18 @@
 		border-bottom: 1px solid var(--border);
 	}
 
-
 	.mobile-nav a {
 		display: block;
-		padding: 1rem 1.5rem;
+		padding: 1rem var(--gutter);
 		color: var(--muted);
 		text-decoration: none;
 		font-size: 1.05rem;
 		border-top: 1px solid var(--border);
+		transition: color var(--motion-normal), background-color var(--motion-normal);
+	}
+
+	.mobile-nav a.active {
+		color: var(--text);
 	}
 
 	@media (max-width: 36em) {
@@ -136,6 +205,10 @@
 
 		.site-nav {
 			display: none !important;
+		}
+
+		.mobile-nav {
+			display: flex;
 		}
 	}
 </style>

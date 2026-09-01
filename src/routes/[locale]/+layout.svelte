@@ -7,10 +7,25 @@
 
 	let { data, children }: { data: { locale: Locale; t: typeof translations.en }; children?: Snippet } = $props();
 
+	// app.html ships lang="en"; keep the document language in sync with
+	// the active locale for accessibility and correct text rendering.
+	$effect(() => {
+		document.documentElement.lang = data.locale;
+	});
+
 	function setLang(next: Locale) {
-		// Navigate to the same path but in a different locale
-		const currentPath = window.location.pathname.replace(/^\/(?:en|id)/, '');
-		window.location.href = `${base}/${next}${currentPath}`;
+		// Swap the locale segment in-place. window.location.pathname already
+		// includes the base path (e.g. '/portfolio/en/about') when a base is
+		// configured, so we must NOT prepend `base` again -- just replace the
+		// locale token and navigate to the result pathname as-is.
+		const parts = window.location.pathname.split('/');
+		for (let i = 1; i < parts.length; i++) {
+			if (parts[i] === 'en' || parts[i] === 'id') {
+				parts[i] = next;
+				break;
+			}
+		}
+		window.location.pathname = parts.join('/');
 	}
 </script>
 
