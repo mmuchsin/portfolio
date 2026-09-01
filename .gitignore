@@ -11,3 +11,8 @@ node_modules
 .claude/
 .codex/
 .agents/
+
+/playwright-report
+/test-results
+.playwright/
+.scratch/
